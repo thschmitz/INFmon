@@ -1,2 +1,2 @@
 # INFmon
-Trabalho final de cadeira de algoritmos e programação UFRGS
+Trabalho final da cadeira de algoritmos e programação UFRGS
