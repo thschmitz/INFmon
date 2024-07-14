@@ -1,56 +1,23 @@
-#include "raylib.h"
-#include <string.h>
+#include "./config/config.h"
 
-int main(void){
-    const int screenWidth = 600;
-    const int screenHeight = 600;
-    char texto[50] = "Pressione uma seta";
+int posicaoX, posicaoY;
 
-    InitWindow(screenWidth, screenHeight, "Quadrado");
-    SetTargetFPS(60);
+int main() {
+	InitWindow(LARGURA, ALTURA, "Quadrado");
+    // Inicializa a posição do quadrado
+    posicaoX = ALTURA / 2 - LADO;
+    posicaoY = LARGURA / 2 - LADO;
 
-    int flagBlocoTela = 1;
-    int boxPositionY = screenHeight/2 - 40;
-    int boxPositionX = screenWidth/2 - 40;
+	SetTargetFPS(60);
+	while (!WindowShouldClose()){
+		leitura_movimentos();
 
-    while (!WindowShouldClose() && flagBlocoTela) {
-
-        ClearBackground(RAYWHITE);
-
-        if (IsKeyPressed(KEY_RIGHT)){
-            strcpy(texto,"Direita");
-            boxPositionX += 20;
-        }
-
-        if (IsKeyPressed(KEY_LEFT)) {
-            strcpy(texto,"Esquerda");
-            boxPositionX -= 20;
-        }
-        if (IsKeyPressed(KEY_UP)){
-            strcpy(texto,"Cima");
-            boxPositionY -= 20;
-        }
-        if (IsKeyPressed(KEY_DOWN)) {
-            strcpy(texto,"Baixo");
-            boxPositionY += 20;
-        }
-
-        BeginDrawing();
-
-        DrawRectangle(boxPositionX, boxPositionY, 20, 20, GREEN);
-
-        DrawText("Use keyboard to move the cube up and down!", 10, 10, 20, GRAY);
-        DrawText(texto, 50, 50, 40, RED);
-
-
-        EndDrawing();
-
-        if(boxPositionX > 580 || boxPositionY > 580 || boxPositionY < 0 || boxPositionX < 0) {
-            flagBlocoTela = 0;
-        }
-    }
-
-    CloseWindow();
-
-    return 0;
+		BeginDrawing();
+		ClearBackground(RAYWHITE);
+		DrawRectangle(posicaoX, posicaoY, LADO, LADO, GREEN);
+		EndDrawing();
+	}
+	CloseWindow();
+	return 0;
 }
+
