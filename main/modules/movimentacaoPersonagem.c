@@ -1,4 +1,4 @@
-#include "./config/config.h"
+#include "../config/config.h"
 
 void leitura_movimentos(){
 	int dx=0;

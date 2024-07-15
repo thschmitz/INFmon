@@ -15,11 +15,17 @@
 #include <stdio.h>
 #include <time.h>
 #include <raylib.h>
+#include <string.h>
 
 // Declaração de variáveis globais
 extern int posicaoX, posicaoY;
+extern const char tituloProjeto[10];
+extern const int tamanhoFonteTituloPrincipal;
+extern const int tamanhoFonteOpcoesMenu;
+extern int menuInicial;
 
 //Bibliotecas do projeto
 #include "../interfaces/movimentacaoPersonagem.h"
+#include "../interfaces/menu.h"
 
 #endif
