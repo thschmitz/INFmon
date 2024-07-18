@@ -1,6 +1,6 @@
 #include "../config/config.h"
 
-void LoadMap(Mapa *map) {
+void LoadMap(Mapa_t *mapa) {
 
     char nome_mapa[20] = "\0";
 
@@ -27,22 +27,22 @@ void LoadMap(Mapa *map) {
     map->grassTexture = loadTexture("textures/grass.png")
 }
 
-void DrawMap(Mapa *map) {
+void DrawMap(Mapa_t *mapa) {
     for (int y = 0; y < LINHAS_MAPA; y++) {
         for (int x = 0; x < COLUNAS_MAPA; x++) {
-            switch (map->tiles[x][y]) {
+            switch (mapa->tiles[x][y]) {
 
                 case 'A':
-                    DrawTexture(map->wallTexture, x * map->wallTexture.width, y * map->wallTexture.height, WHITE);
+                    DrawTexture(mapa->wallTexture, x * mapa->wallTexture.width, y * mapa->wallTexture.height, WHITE);
                     break;
                 case '\o':
-                    DrawTexture(map->groundTexture, x * map->groundTexture.width, y * map->groundTexture.height, WHITE);
+                    DrawTexture(mapa->groundTexture, x * mapa->groundTexture.width, y * mapa->groundTexture.height, WHITE);
                     break;
                 case 'J':
-                    DrawTexture(map->playerTexture, x * map->playerTexture.width, y * map->playerTexture.height, WHITE);
+                    DrawTexture(mapa->playerTexture, x * mapa->playerTexture.width, y * mapa->playerTexture.height, WHITE);
                     break;
                 case 'G':
-                    DrawTexture(map->playerTexture, x * map->grassTexture.width, y * map->playerTexture.height, WHITE);
+                    DrawTexture(mapa->playerTexture, x * mapa->grassTexture.width, y * mapa->playerTexture.height, WHITE);
                     break;
                 default:
                     break;

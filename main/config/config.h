@@ -27,9 +27,9 @@ extern const int tamanhoFonteOpcoesMenu;
 extern int menuInicial;
 
 //Bibliotecas do projeto
+#include "../interfaces/structs.h"
 #include "../interfaces/movimentacaoPersonagem.h"
 #include "../interfaces/menu.h"
 #include "../interfaces/mapa.h"
-#include "../interfaces/structs.h"
 
 #endif
