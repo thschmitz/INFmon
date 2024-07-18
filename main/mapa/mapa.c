@@ -24,6 +24,7 @@ void LoadMap(Mapa *map) {
     map->wallTexture = LoadTexture("textures/wall.png");
     map->groundTexture = LoadTexture("textures/ground.png");
     map->playerTexture = LoadTexture("textures/player.png");
+    map->grassTexture = loadTexture("textures/grass.png")
 }
 
 void DrawMap(Mapa *map) {
@@ -41,7 +42,7 @@ void DrawMap(Mapa *map) {
                     DrawTexture(map->playerTexture, x * map->playerTexture.width, y * map->playerTexture.height, WHITE);
                     break;
                 case 'G':
-                    DrawTexture(map->playerTexture, x * map->playerTexture.width, y * map->playerTexture.height, WHITE);
+                    DrawTexture(map->playerTexture, x * map->grassTexture.width, y * map->playerTexture.height, WHITE);
                     break;
                 default:
                     break;

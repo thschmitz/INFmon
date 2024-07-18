@@ -11,6 +11,7 @@ typedef struct {
     Texture2D wallTexture;
     Texture2D groundTexture;
     Texture2D playerTexture;
+    Texture2D grassTexture;
 
 } Mapa;
 
