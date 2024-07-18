@@ -1,6 +1,6 @@
 #include "../config/config.h"
 
-void LoadMap(Mapa *map, ) {
+void LoadMap(Mapa *map) {
 
     char nome_mapa[20] = "\0";
 
@@ -9,7 +9,7 @@ void LoadMap(Mapa *map, ) {
     FILE *file = fopen(nome_mapa, "r");
 
     if (!file) {
-        printf("Failed to load map file: %s\n", nome_mapa);
+        printf("Falha no carregamento do mapa: %s\n", nome_mapa);
         return;
     }
 
@@ -27,9 +27,10 @@ void LoadMap(Mapa *map, ) {
 }
 
 void DrawMap(Mapa *map) {
-    for (int y = 0; y < MAP_HEIGHT; y++) {
-        for (int x = 0; x < MAP_WIDTH; x++) {
+    for (int y = 0; y < LINHAS_MAPA; y++) {
+        for (int x = 0; x < COLUNAS_MAPA; x++) {
             switch (map->tiles[x][y]) {
+
                 case 'A':
                     DrawTexture(map->wallTexture, x * map->wallTexture.width, y * map->wallTexture.height, WHITE);
                     break;
@@ -45,6 +46,7 @@ void DrawMap(Mapa *map) {
                 default:
                     break;
             }
+            
         }
     }
 }
