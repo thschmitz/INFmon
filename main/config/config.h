@@ -2,9 +2,11 @@
 #define config_lib
 
 //Tamanhos para a tela e para o persongaem
-#define LARGURA 800
-#define ALTURA 800
+#define LARGURA 1920
+#define ALTURA 1080
 #define LADO 20
+#define LINHAS_MAPA 96
+#define COLUNAS_MAPA 54
 
 //Defines de booleanos para facilitar a leitura
 #define true 1
@@ -27,5 +29,7 @@ extern int menuInicial;
 //Bibliotecas do projeto
 #include "../interfaces/movimentacaoPersonagem.h"
 #include "../interfaces/menu.h"
+#include "../interfaces/mapa.h"
+#include "../interfaces/structs.h"
 
 #endif
