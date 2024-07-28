@@ -24,7 +24,8 @@ extern int posicaoX, posicaoY;
 extern const char tituloProjeto[10];
 extern const int tamanhoFonteTituloPrincipal;
 extern const int tamanhoFonteOpcoesMenu;
-extern int menuInicial;
+extern int menu_inicial_rodando;
+extern int programa_rodando;
 
 //Bibliotecas do projeto
 #include "../interfaces/structs.h"

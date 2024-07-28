@@ -1,6 +1,6 @@
 #ifndef MENU_H
 #define MENU_H
 
-int menu_inicial();
+void menu_inicial();
 
 #endif

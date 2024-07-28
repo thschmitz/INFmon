@@ -21,10 +21,10 @@ void LoadMap(Mapa_t *mapa) {
 
     fclose(file);
 
-    map->wallTexture = LoadTexture("textures/wall.png");
-    map->groundTexture = LoadTexture("textures/ground.png");
-    map->playerTexture = LoadTexture("textures/player.png");
-    map->grassTexture = loadTexture("textures/grass.png")
+    map->wallTexture = LoadTexture("texturas/wall.png");
+    map->groundTexture = LoadTexture("texturas/ground.png");
+    map->playerTexture = LoadTexture("texturas/player.png");
+    map->grassTexture = loadTexture("texturas/grass.png")
 }
 
 void DrawMap(Mapa_t *mapa) {

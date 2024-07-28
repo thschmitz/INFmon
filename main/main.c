@@ -7,12 +7,17 @@ int main() {
 	posicaoY = LARGURA / 2 - LADO;
 
 	SetTargetFPS(60);
+	SetExitKey(KEY_BACKSPACE);
 
-	while (!WindowShouldClose()){
-		if(menuInicial == 1){
-			menuInicial = menu_inicial();
+	while (!WindowShouldClose() && programa_rodando) {
+		if (menu_inicial_rodando) {
+			menu_inicial();
 		} else {
 			leitura_movimentos();
+
+			if (IsKeyPressed(KEY_ESCAPE)) {
+				menu_inicial_rodando = true;
+			}
 
 			BeginDrawing();
 			ClearBackground(RAYWHITE);
@@ -20,7 +25,7 @@ int main() {
 			EndDrawing();
 		}
 	}
+
 	CloseWindow();
 	return 0;
 }
-

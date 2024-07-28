@@ -7,7 +7,6 @@
     Inclui as texturas do jogo
 */
 typedef struct texturas {
-
     Texture2D wallTexture;
     Texture2D groundTexture;
     Texture2D playerTexture;

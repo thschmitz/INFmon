@@ -7,4 +7,5 @@ const int tamanhoFonteTituloPrincipal = 150;
 const int tamanhoFonteOpcoesMenu = 40;
 
 // Status do jogo
-int menuInicial=1;
+int menu_inicial_rodando=true;
+int programa_rodando=true;
