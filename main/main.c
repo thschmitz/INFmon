@@ -5,6 +5,7 @@ int main() {
 	// Inicializa a posição do quadrado
 	posicaoX = ALTURA / 2 - LADO;
 	posicaoY = LARGURA / 2 - LADO;
+	Mapa_t mapa;
 
 	SetTargetFPS(60);
 	SetExitKey(KEY_BACKSPACE);
@@ -18,8 +19,8 @@ int main() {
 			if (IsKeyPressed(KEY_ESCAPE)) {
 				menu_inicial_rodando = true;
 			}
-
-			BeginDrawing();
+			LoadMap(&mapa);
+			DrawMap(&mapa);
 			ClearBackground(RAYWHITE);
 			DrawRectangle(posicaoX, posicaoY, LADO, LADO, GREEN);
 			EndDrawing();

@@ -17,9 +17,9 @@ typedef struct texturas {
 /*
     Essa struct engloba os elementos mapa
 */
-typedef struct mapa{
+typedef struct mapa {
 
-    char mapa[LINHAS_MAPA][COLUNAS_MAPA];
+    char tiles[LINHAS_MAPA][COLUNAS_MAPA];
     int fase_atual;
     Texturas_t texturas;
 
