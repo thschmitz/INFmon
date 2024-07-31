@@ -1,96 +1,54 @@
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-A                                                  A
-A                      J                           A
-A                                                  A
-A                                                  A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A    G                         G                   A
-A                                                  A
-A                                                  A
-A                                                  A
-A                                                  A
-A                                                  A
-A                                                  A
-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+A                                                                                              A
+A                                                                                              A
+A                    J                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+A                    G                                  G                                      A
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
