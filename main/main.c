@@ -6,6 +6,9 @@ int main() {
 	posicaoX = ALTURA / 2 - LADO;
 	posicaoY = LARGURA / 2 - LADO;
 	Mapa_t mapa;
+	Texturas_t texturas;
+  texturas.personagemPrincipal = LoadTexture("./texturas/sprite.png"); 
+
 
 	SetTargetFPS(60);
 	SetExitKey(KEY_BACKSPACE);
@@ -22,7 +25,11 @@ int main() {
 			LoadMap(&mapa);
 			DrawMap(&mapa);
 			ClearBackground(RAYWHITE);
-			DrawRectangle(posicaoX, posicaoY, LADO, LADO, GREEN);
+			Vector2 position = { posicaoX, posicaoY };
+
+			//DrawTextureEx(texturas.personagemPrincipal, position, 0.0f, 3.0f, WHITE);
+			DrawTexture(texturas.personagemPrincipal, posicaoX, posicaoY, WHITE);
+			//DrawRectangle(posicaoX, posicaoY, LADO, LADO, GREEN);
 			EndDrawing();
 		}
 	}

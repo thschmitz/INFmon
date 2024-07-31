@@ -3,21 +3,23 @@
 void leitura_movimentos(){
 	int dx=0;
 	int dy=0;
+	float speed = 10.0f;
+	float deltaTime = GetFrameTime();
 
-	if (IsKeyPressed(KEY_RIGHT)) {
-		dx = LADO; 
+	if (IsKeyDown(KEY_RIGHT)) {
+		dx = LADO * speed * deltaTime; 
 	}
 
-	if (IsKeyPressed(KEY_LEFT)) {
-		dx = -LADO;
+	if (IsKeyDown(KEY_LEFT)) {
+		dx = -LADO * speed * deltaTime;
 	}
 
-	if (IsKeyPressed(KEY_UP)){
-		dy = -LADO;
+	if (IsKeyDown(KEY_UP)){
+		dy = -LADO * speed * deltaTime;
 	}
 
-	if (IsKeyPressed(KEY_DOWN)) {
-		dy = LADO;
+	if (IsKeyDown(KEY_DOWN)) {
+		dy = LADO * speed * deltaTime;
 	}
 
 	if(deveMover(posicaoX, posicaoY, dx, dy) == 1) {

@@ -12,25 +12,23 @@ int measure_text(const char *text, int tamanhoFonte) {
 }
 
 void menu_inicial() {
+  Texturas_t texturas;
   int selection = 0;
   int menuOpen = true;
-  Image image = LoadImage("../texturas/ponteiroMenuInicial.png"); 
-  Texture2D cursorTelaInicial = LoadTextureFromImage(image);    
-  UnloadImage(image);
-  
+  texturas.ponteiroMenuInicialTexture = LoadTexture("./texturas/ponteiroMenuInicial.png"); 
+
   while (menuOpen) {
     ClearBackground(WHITE);
     BeginDrawing();
 
     DrawText(tituloProjeto, LARGURA / 2 - (measure_text(tituloProjeto, tamanhoFonteTituloPrincipal) / 2), 20, tamanhoFonteTituloPrincipal, BLACK);
-
     for (int i = 0; i < 3; i++) {
       Color cor = (i == selection) ? RED : BLACK;
       DrawText(labelBotoes[i], LARGURA / 2 - (measure_text(labelBotoes[i], tamanhoFonteOpcoesMenu) / 2), ALTURA / 2 + i * 100, tamanhoFonteOpcoesMenu, cor);
       if (i == selection) {
-        int posX = (LARGURA / 2 - (measure_text(labelBotoes[i], tamanhoFonteOpcoesMenu) / 2)) - cursorTelaInicial.width - 10;
-        int posY = ALTURA / 2 + i * 100 - cursorTelaInicial.height / 2;
-        DrawTexture(cursorTelaInicial, posX, posY + 10, WHITE);
+        int posX = (LARGURA / 2 - (measure_text(labelBotoes[i], tamanhoFonteOpcoesMenu) / 2)) - texturas.ponteiroMenuInicialTexture.width - 10;
+        int posY = ALTURA / 2 + i * 100 - texturas.ponteiroMenuInicialTexture.height / 2;
+        DrawTexture(texturas.ponteiroMenuInicialTexture, posX, posY + 10, WHITE);
       }
     }
 
@@ -50,7 +48,7 @@ void menu_inicial() {
     }
   }
 
-  UnloadTexture(cursorTelaInicial);
+  UnloadTexture(texturas.ponteiroMenuInicialTexture);
 
   if (IsKeyPressed(KEY_ENTER)) {
     switch (selection) {
