@@ -5,8 +5,8 @@
 #define LARGURA 1920
 #define ALTURA 1080
 #define LADO 20
-#define LINHAS_MAPA 96
-#define COLUNAS_MAPA 54
+#define LINHAS_MAPA 54
+#define COLUNAS_MAPA 96
 
 //Defines de booleanos para facilitar a leitura
 #define true 1

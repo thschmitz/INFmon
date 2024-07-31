@@ -15,8 +15,14 @@ void LoadMap(Mapa_t *mapa) {
 
     for (int y = 0; y < LINHAS_MAPA; y++) {
         for (int x = 0; x < COLUNAS_MAPA; x++) {
-            fscanf(file, "%c", &mapa->tiles[x][y]);
+            char ch = fgetc(file);
+            if (ch == EOF) {
+                break;
+            }else{
+                mapa->tiles[y][x] = ch;
+            }
         }
+        fgetc(file);
     }
 
     fclose(file);
@@ -30,7 +36,7 @@ void LoadMap(Mapa_t *mapa) {
 void DrawMap(Mapa_t *mapa) {
     for (int y = 0; y < LINHAS_MAPA; y++) {
         for (int x = 0; x < COLUNAS_MAPA; x++) {
-            switch (mapa->tiles[x][y]) {
+            switch (mapa->tiles[y][x]) { 
                 case 'A':
                     DrawTexture(mapa->texturas.wallTexture, x * mapa->texturas.wallTexture.width, y * mapa->texturas.wallTexture.height, WHITE);
                     break;
@@ -44,6 +50,7 @@ void DrawMap(Mapa_t *mapa) {
                     DrawTexture(mapa->texturas.grassTexture, x * mapa->texturas.grassTexture.width, y * mapa->texturas.grassTexture.height, WHITE);
                     break;
                 default:
+                    //DrawTexture(mapa->texturas.groundTexture, x * mapa->texturas.groundTexture.width, y * mapa->texturas.groundTexture.height, WHITE);
                     break;
             }
             
