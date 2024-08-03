@@ -13,14 +13,21 @@ int main() {
 	SetTargetFPS(60);
 	SetExitKey(KEY_BACKSPACE);
 	LoadMap(&mapa);
-	ToggleFullscreen();   
 
 	Vector2 position = { posicaoX, posicaoY };
 	Camera2D camera = { 0 };
-    camera.target = position;
-    camera.offset = (Vector2){ LARGURA/2.0f, ALTURA/2.0f };
-    camera.rotation = 0.0f;
-    camera.zoom = 4.0f;
+	camera.target = position;
+	camera.offset = (Vector2){ LARGURA/2.0f, ALTURA/2.0f };
+	camera.rotation = 0.0f;
+	camera.zoom = 4.0f;
+
+	bool fullscreen = false;
+
+	/*if(!IsWindowFullscreen()){
+		int monitor = GetCurrentMonitor();
+		SetWindowSize(GetMonitorWidth(monitor), GetMonitorHeight(monitor));
+		ToggleFullscreen();
+	}*/
 
 	while (!WindowShouldClose() && programa_rodando) {
 		if (menu_inicial_rodando) {
@@ -29,12 +36,11 @@ int main() {
 			menu_opcoes();
 		} else {
 			leitura_movimentos();
-
 			if (IsKeyPressed(KEY_ESCAPE)) {
 				menu_opcoes_rodando = true;
 			}
-
 			LoadMap(&mapa);
+
 			//if (camera.target.x < LARGURA / 2 / camera.zoom) camera.target.x = LARGURA / 2 / camera.zoom;
         	//if (camera.target.y < ALTURA / 2 / camera.zoom) camera.target.y = ALTURA / 2 / camera.zoom;
         	//if (camera.target.x > LARGURA / 2 / camera.zoom) camera.target.x = LARGURA / 2 / camera.zoom;
