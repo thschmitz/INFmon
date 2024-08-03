@@ -2,11 +2,11 @@
 #define config_lib
 
 //Tamanhos para a tela e para o persongaem
-#define LARGURA 1920
-#define ALTURA 1080
+#define LARGURA 1280
+#define ALTURA 720
 #define LADO 20
-#define LINHAS_MAPA 54
-#define COLUNAS_MAPA 96
+#define LINHAS_MAPA 36
+#define COLUNAS_MAPA 64
 
 //Defines de booleanos para facilitar a leitura
 #define true 1

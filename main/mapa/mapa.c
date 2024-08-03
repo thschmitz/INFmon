@@ -37,10 +37,11 @@ void DrawMap(Mapa_t *mapa) {
     for (int y = 0; y < LINHAS_MAPA; y++) {
         for (int x = 0; x < COLUNAS_MAPA; x++) {
             switch (mapa->tiles[y][x]) { 
+    
                 case 'A':
                     DrawTexture(mapa->texturas.wallTexture, x * mapa->texturas.wallTexture.width, y * mapa->texturas.wallTexture.height, WHITE);
                     break;
-                case '\0':
+                case ' ':
                     DrawTexture(mapa->texturas.groundTexture, x * mapa->texturas.groundTexture.width, y * mapa->texturas.groundTexture.height, WHITE);
                     break;
                 case 'J':
@@ -53,7 +54,6 @@ void DrawMap(Mapa_t *mapa) {
                     //DrawTexture(mapa->texturas.groundTexture, x * mapa->texturas.groundTexture.width, y * mapa->texturas.groundTexture.height, WHITE);
                     break;
             }
-            
         }
     }
 }
