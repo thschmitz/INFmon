@@ -8,4 +8,5 @@ const int tamanhoFonteOpcoesMenu = 40;
 
 // Status do jogo
 int menu_inicial_rodando=true;
+int menu_opcoes_rodando=false;
 int programa_rodando=true;

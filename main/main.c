@@ -16,20 +16,19 @@ int main() {
 	while (!WindowShouldClose() && programa_rodando) {
 		if (menu_inicial_rodando) {
 			menu_inicial();
+		} else if(menu_opcoes_rodando){
+			menu_opcoes();
 		} else {
 			leitura_movimentos();
 
 			if (IsKeyPressed(KEY_ESCAPE)) {
-				menu_inicial_rodando = true;
+				menu_opcoes_rodando = true;
 			}
+
 			LoadMap(&mapa);
 			DrawMap(&mapa);
 			ClearBackground(RAYWHITE);
-			Vector2 position = { posicaoX, posicaoY };
-
-			//DrawTextureEx(texturas.personagemPrincipal, position, 0.0f, 3.0f, WHITE);
 			DrawTexture(texturas.personagemPrincipal, posicaoX, posicaoY, WHITE);
-			//DrawRectangle(posicaoX, posicaoY, LADO, LADO, GREEN);
 			EndDrawing();
 		}
 	}

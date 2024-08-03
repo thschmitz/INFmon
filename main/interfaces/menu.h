@@ -2,5 +2,6 @@
 #define MENU_H
 
 void menu_inicial();
+void menu_opcoes();
 
 #endif

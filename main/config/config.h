@@ -25,6 +25,7 @@ extern const char tituloProjeto[10];
 extern const int tamanhoFonteTituloPrincipal;
 extern const int tamanhoFonteOpcoesMenu;
 extern int menu_inicial_rodando;
+extern int menu_opcoes_rodando;
 extern int programa_rodando;
 
 //Bibliotecas do projeto

@@ -20,11 +20,16 @@ typedef struct texturas {
     Essa struct engloba os elementos mapa
 */
 typedef struct mapa {
-
-    char tiles[LINHAS_MAPA][COLUNAS_MAPA];
     int fase_atual;
+    char tiles[LINHAS_MAPA][COLUNAS_MAPA];
     Texturas_t texturas;
 
 } Mapa_t;
+
+typedef struct jogador {
+    int posicaoX;
+    int posicaoY;
+    int vida;
+} Jogador_t;
 
 #endif
