@@ -1,14 +1,15 @@
 #include "./config/config.h"
 
 int main() {
-	InitWindow(LARGURA, ALTURA, tituloProjeto);
-	// Inicializa a posição do quadrado
-	posicaoX = ALTURA / 2 - LADO;
-	posicaoY = LARGURA / 2 - LADO;
+	InitWindow(COLUNAS_MAPA * LADO, LINHAS_MAPA * LADO, tituloProjeto);
+	larguraMonitor = GetMonitorWidth(GetCurrentMonitor());
+	alturaMonitor = GetMonitorHeight(GetCurrentMonitor());
+
+	posicaoX = COLUNAS_MAPA * LADO / 2 - LADO;
+	posicaoY = LINHAS_MAPA * LADO / 2 - LADO;
 	Mapa_t mapa;
 	Texturas_t texturas;
   	texturas.personagemPrincipal = LoadTexture("./texturas/sprite.png"); 
-
 
 	SetTargetFPS(60);
 	SetExitKey(KEY_BACKSPACE);
@@ -17,17 +18,13 @@ int main() {
 	Vector2 position = { posicaoX, posicaoY };
 	Camera2D camera = { 0 };
 	camera.target = position;
-	camera.offset = (Vector2){ LARGURA/2.0f, ALTURA/2.0f };
+	camera.offset = (Vector2){ larguraMonitor / 2.0f, alturaMonitor /2.0f };
 	camera.rotation = 0.0f;
 	camera.zoom = 4.0f;
 
 	bool fullscreen = false;
-
-	/*if(!IsWindowFullscreen()){
-		int monitor = GetCurrentMonitor();
-		SetWindowSize(GetMonitorWidth(monitor), GetMonitorHeight(monitor));
-		ToggleFullscreen();
-	}*/
+	SetWindowSize(larguraMonitor, alturaMonitor);
+	ToggleFullscreen();
 
 	while (!WindowShouldClose() && programa_rodando) {
 		if (menu_inicial_rodando) {

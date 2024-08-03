@@ -29,7 +29,7 @@ void leitura_movimentos(){
 
 int deveMover(int x, int y, int dx, int dy) {
 	int mover;
-	if(x + dx < 0 || x + dx > LARGURA - LADO || y + dy < 0 || y + dy > ALTURA - LADO){
+	if(x + dx < 0 || x + dx > (COLUNAS_MAPA * LADO) - LADO || y + dy < 0 || y + dy > (LINHAS_MAPA * LADO) - LADO){
 		mover = 0;
 	} else {
 		mover = 1;

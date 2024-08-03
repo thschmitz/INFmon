@@ -1,12 +1,13 @@
 #ifndef config_lib
 #define config_lib
 
-//Tamanhos para a tela e para o persongaem
-#define LARGURA 1280
-#define ALTURA 720
+//Tamanhos para o mapa
 #define LADO 20
 #define LINHAS_MAPA 36
 #define COLUNAS_MAPA 64
+
+#define TAMANHO_FONTE_TITULO_PRINCIPAL 150
+#define TAMANHO_FONTE_OPCOES_MENU 40
 
 //Defines de booleanos para facilitar a leitura
 #define true 1
@@ -20,10 +21,12 @@
 #include <string.h>
 
 // Declaração de variáveis globais
+extern int larguraMonitor;
+extern int alturaMonitor;
 extern int posicaoX, posicaoY;
 extern const char tituloProjeto[10];
-extern const int tamanhoFonteTituloPrincipal;
-extern const int tamanhoFonteOpcoesMenu;
+
+// Estados do jogo
 extern int menu_inicial_rodando;
 extern int menu_opcoes_rodando;
 extern int programa_rodando;

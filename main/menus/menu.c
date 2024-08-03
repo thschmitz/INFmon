@@ -27,13 +27,13 @@ void menu_opcoes() {
     ClearBackground(WHITE);
     BeginDrawing();
 
-    DrawText(tituloProjeto, LARGURA / 2 - (measure_text(tituloProjeto, tamanhoFonteTituloPrincipal) / 2), 20, tamanhoFonteTituloPrincipal, BLACK);
+    DrawText(tituloProjeto, larguraMonitor / 2 - (measure_text(tituloProjeto, TAMANHO_FONTE_TITULO_PRINCIPAL) / 2), 20, TAMANHO_FONTE_TITULO_PRINCIPAL, BLACK);
     for (int i = 0; i < 3; i++) {
       Color cor = (i == selection) ? RED : BLACK;
-      DrawText(labelBotoesMenuOpcoes[i], LARGURA / 2 - (measure_text(labelBotoesMenuOpcoes[i], tamanhoFonteOpcoesMenu) / 2), ALTURA / 2 + i * 100, tamanhoFonteOpcoesMenu, cor);
+      DrawText(labelBotoesMenuOpcoes[i], larguraMonitor / 2 - (measure_text(labelBotoesMenuOpcoes[i], TAMANHO_FONTE_OPCOES_MENU) / 2), alturaMonitor / 2 + i * 100, TAMANHO_FONTE_OPCOES_MENU, cor);
       if (i == selection) {
-        int posX = (LARGURA / 2 - (measure_text(labelBotoesMenuOpcoes[i], tamanhoFonteOpcoesMenu) / 2)) - texturas.ponteiroMenuInicialTexture.width - 10;
-        int posY = ALTURA / 2 + i * 100 - texturas.ponteiroMenuInicialTexture.height / 2;
+        int posX = (larguraMonitor / 2 - (measure_text(labelBotoesMenuOpcoes[i], TAMANHO_FONTE_OPCOES_MENU) / 2)) - texturas.ponteiroMenuInicialTexture.width - 10;
+        int posY = alturaMonitor / 2 + i * 100 - texturas.ponteiroMenuInicialTexture.height / 2;
         DrawTexture(texturas.ponteiroMenuInicialTexture, posX, posY + 10, WHITE);
       }
     }
@@ -99,13 +99,13 @@ void menu_inicial() {
     ClearBackground(WHITE);
     BeginDrawing();
 
-    DrawText(tituloProjeto, LARGURA / 2 - (measure_text(tituloProjeto, tamanhoFonteTituloPrincipal) / 2), 20, tamanhoFonteTituloPrincipal, BLACK);
+    DrawText(tituloProjeto, larguraMonitor / 2 - (measure_text(tituloProjeto, TAMANHO_FONTE_TITULO_PRINCIPAL) / 2), 20, TAMANHO_FONTE_TITULO_PRINCIPAL, BLACK);
     for (int i = 0; i < 3; i++) {
       Color cor = (i == selection) ? RED : BLACK;
-      DrawText(labelBotoesMenuInicial[i], LARGURA / 2 - (measure_text(labelBotoesMenuInicial[i], tamanhoFonteOpcoesMenu) / 2), ALTURA / 2 + i * 100, tamanhoFonteOpcoesMenu, cor);
+      DrawText(labelBotoesMenuInicial[i], larguraMonitor / 2 - (measure_text(labelBotoesMenuInicial[i], TAMANHO_FONTE_OPCOES_MENU) / 2), alturaMonitor / 2 + i * 100, TAMANHO_FONTE_OPCOES_MENU, cor);
       if (i == selection) {
-        int posX = (LARGURA / 2 - (measure_text(labelBotoesMenuInicial[i], tamanhoFonteOpcoesMenu) / 2)) - texturas.ponteiroMenuInicialTexture.width - 10;
-        int posY = ALTURA / 2 + i * 100 - texturas.ponteiroMenuInicialTexture.height / 2;
+        int posX = (larguraMonitor / 2 - (measure_text(labelBotoesMenuInicial[i], TAMANHO_FONTE_OPCOES_MENU) / 2)) - texturas.ponteiroMenuInicialTexture.width - 10;
+        int posY = alturaMonitor / 2 + i * 100 - texturas.ponteiroMenuInicialTexture.height / 2;
         DrawTexture(texturas.ponteiroMenuInicialTexture, posX, posY + 10, WHITE);
       }
     }

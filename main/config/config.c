@@ -3,8 +3,10 @@
 // Declaração de variáveis globais
 int posicaoX, posicaoY;
 const char tituloProjeto[10] = "INFmon";
-const int tamanhoFonteTituloPrincipal = 150;
-const int tamanhoFonteOpcoesMenu = 40;
+
+// Variaveis de tamanho da tela
+int larguraMonitor;
+int alturaMonitor;
 
 // Status do jogo
 int menu_inicial_rodando=true;
