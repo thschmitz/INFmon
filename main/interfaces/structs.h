@@ -4,7 +4,7 @@
 #include "../config/config.h"
 
 /*
-    Inclui as texturas do jogo
+    Essa struct engloba as texturas do jogo
 */
 typedef struct texturas {
     Texture2D ponteiroMenuInicialTexture;
@@ -23,13 +23,14 @@ typedef struct mapa {
     int fase_atual;
     char tiles[LINHAS_MAPA][COLUNAS_MAPA];
     Texturas_t texturas;
-
 } Mapa_t;
 
+/*
+    Essa struct engloba os elementos do jogador
+*/
 typedef struct jogador {
     int posicaoX;
     int posicaoY;
-    int vida;
 } Jogador_t;
 
 #endif

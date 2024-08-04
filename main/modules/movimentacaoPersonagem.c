@@ -22,8 +22,8 @@ void leitura_movimentos(){
 		dy = LADO * speed * deltaTime;
 	}
 
-	if(deveMover(posicaoX, posicaoY, dx, dy) == 1) {
-		move(dx, dy, &posicaoX, &posicaoY);
+	if(deveMover((jogador.posicaoX), (jogador.posicaoY), dx, dy) == 1) {
+		move(dx, dy, &(jogador.posicaoX), &(jogador.posicaoY));
 	}
 }
 

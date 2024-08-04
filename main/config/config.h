@@ -20,21 +20,22 @@
 #include <raylib.h>
 #include <string.h>
 
-// Declaração de variáveis globais
-extern int larguraMonitor;
-extern int alturaMonitor;
-extern int posicaoX, posicaoY;
-extern const char tituloProjeto[10];
-
-// Estados do jogo
-extern int menu_inicial_rodando;
-extern int menu_opcoes_rodando;
-extern int programa_rodando;
-
 //Bibliotecas do projeto
 #include "../interfaces/structs.h"
 #include "../interfaces/movimentacaoPersonagem.h"
 #include "../interfaces/menu.h"
 #include "../interfaces/mapa.h"
+
+// Declaração de variáveis globais
+extern int larguraMonitor;
+extern int alturaMonitor;
+extern int posicaoX, posicaoY;
+extern const char tituloProjeto[10];
+extern Jogador_t jogador;
+
+// Estados do jogo
+extern int menu_inicial_rodando;
+extern int menu_opcoes_rodando;
+extern int programa_rodando;
 
 #endif

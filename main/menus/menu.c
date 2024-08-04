@@ -1,5 +1,7 @@
 #include "../config/config.h"
 
+#define TAMANHO_LINHA_ARQUIVO 256
+
 static const char *labelBotoesMenuInicial[] = {
   "NOVO JOGO",
   "CARREGAR JOGO",
@@ -66,7 +68,7 @@ void menu_opcoes() {
         break;
       case 1:
         // Salvar jogo
-        //salvar();
+        salvarJogo();
         menu_inicial_rodando = false;
         menu_opcoes_rodando = false;
         menuOpen = false;
@@ -83,11 +85,6 @@ void menu_opcoes() {
   }
 }
 
-void salvarJogo(){
-  FILE *file;
-
-
-}
 
 void menu_inicial() {
   Texturas_t texturas;
@@ -132,12 +129,13 @@ void menu_inicial() {
     switch (selection) {
       case 0:
         // Novo Jogo
+        novoJogo();
         menu_inicial_rodando = false;
         menuOpen = false;
         break;
       case 1:
         // Carregar Jogo
-        //carregarJogo();
+        carregarJogo();
         menu_inicial_rodando = false;
         menuOpen = false;
         break;
@@ -151,7 +149,40 @@ void menu_inicial() {
   }
 }
 
+void salvarJogo(){
+  FILE *arq;
+  arq = fopen("data/bin.txt", "w");
+
+  if(arq == NULL) {
+    printf("Erro na criacao do arquivo .txt para salvamento dos dados\n");
+  } else {
+    fprintf(arq, "X: %d, Y: %d", jogador.posicaoX, jogador.posicaoY);
+
+    fclose(arq);
+  }
+}
+
 void carregarJogo(){
   FILE *arq;
+  char line[TAMANHO_LINHA_ARQUIVO];
+  arq = fopen("data/bin.txt", "r");
 
+  if(arq == NULL){
+    printf("Erro na leitura do arquivo .txt para salvamento dos dados\n");
+  } else {
+    if(fgets(line, TAMANHO_LINHA_ARQUIVO, arq) != NULL){
+      line[strcspn(line, "\n")] = 0;
+
+      if(sscanf(line, "X: %d, Y: %d", &jogador.posicaoX, &jogador.posicaoY) == 4){
+        printf("Sucesso ao extrair os valores!");
+      } else {
+        printf("Erro ao extrair os valores!");
+      }
+    }
+  }
+}
+
+void novoJogo() {
+  jogador.posicaoX = COLUNAS_MAPA * LADO / 2 - LADO;
+	jogador.posicaoY = LINHAS_MAPA * LADO / 2 - LADO;
 }

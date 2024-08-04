@@ -4,9 +4,10 @@ int main() {
 	InitWindow(COLUNAS_MAPA * LADO, LINHAS_MAPA * LADO, tituloProjeto);
 	larguraMonitor = GetMonitorWidth(GetCurrentMonitor());
 	alturaMonitor = GetMonitorHeight(GetCurrentMonitor());
+	
+	jogador.posicaoX = COLUNAS_MAPA * LADO / 2 - LADO;
+	jogador.posicaoY = LINHAS_MAPA * LADO / 2 - LADO;
 
-	posicaoX = COLUNAS_MAPA * LADO / 2 - LADO;
-	posicaoY = LINHAS_MAPA * LADO / 2 - LADO;
 	Mapa_t mapa;
 	Texturas_t texturas;
   	texturas.personagemPrincipal = LoadTexture("./texturas/sprite.png"); 
@@ -15,7 +16,7 @@ int main() {
 	SetExitKey(KEY_BACKSPACE);
 	LoadMap(&mapa);
 
-	Vector2 position = { posicaoX, posicaoY };
+	Vector2 position = { jogador.posicaoX, jogador.posicaoY };
 	Camera2D camera = { 0 };
 	camera.target = position;
 	camera.offset = (Vector2){ larguraMonitor / 2.0f, alturaMonitor /2.0f };
@@ -48,10 +49,10 @@ int main() {
 			DrawMap(&mapa);
 
 			ClearBackground(RAYWHITE);
-			Vector2 position = { posicaoX, posicaoY };
+			Vector2 position = { jogador.posicaoX, jogador.posicaoY };
 			camera.target = position;
 
-			DrawTexture(texturas.personagemPrincipal, posicaoX, posicaoY, WHITE);
+			DrawTexture(texturas.personagemPrincipal, jogador.posicaoX, jogador.posicaoY, WHITE);
 			EndDrawing();
 			EndMode2D();
 		}

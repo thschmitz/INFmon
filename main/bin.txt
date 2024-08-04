@@ -1,0 +1,1 @@
+Dados do jogador: X: 354Y: 295Vida: 0.000000Fase: 0
