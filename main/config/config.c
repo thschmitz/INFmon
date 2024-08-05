@@ -4,6 +4,7 @@
 int posicaoX, posicaoY;
 const char tituloProjeto[10] = "INFmon";
 Jogador_t jogador;
+Mapa_t mapa;
 
 // Variaveis de tamanho da tela
 int larguraMonitor;
