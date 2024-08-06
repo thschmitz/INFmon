@@ -1,7 +1,6 @@
 #include "config.h"
 
 // Declaração de variáveis globais
-int posicaoX, posicaoY;
 const char tituloProjeto[10] = "INFmon";
 Jogador_t jogador;
 

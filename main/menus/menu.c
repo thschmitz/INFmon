@@ -140,6 +140,7 @@ void menu_inicial() {
         menuOpen = false;
         break;
       case 2:
+        // Sair do jogo
         programa_rodando = false;
         menuOpen = false;
         break;
@@ -151,13 +152,18 @@ void menu_inicial() {
 
 void salvarJogo(){
   FILE *arq;
+  int i;
   arq = fopen("data/bin.txt", "w");
 
   if(arq == NULL) {
     printf("Erro na criacao do arquivo .txt para salvamento dos dados\n");
   } else {
+    //fprintf("Posicao Jogador:");
     fprintf(arq, "X: %d, Y: %d", jogador.posicaoX, jogador.posicaoY);
-
+    /*fprintf("Pokemons:");
+    for(i=0; i<jogador.pokemons;i++){
+      fprintf("%d) %s\n", i+1, jogador.pokemons[i].nome);
+    }*/
     fclose(arq);
   }
 }
@@ -173,12 +179,26 @@ void carregarJogo(){
     if(fgets(line, TAMANHO_LINHA_ARQUIVO, arq) != NULL){
       line[strcspn(line, "\n")] = 0;
 
-      if(sscanf(line, "X: %d, Y: %d", &jogador.posicaoX, &jogador.posicaoY) == 4){
+      if(sscanf(line, "X: %d, Y: %d", &jogador.posicaoX, &jogador.posicaoY) == 2){
         printf("Sucesso ao extrair os valores!");
       } else {
         printf("Erro ao extrair os valores!");
       }
     }
+
+    /*if (fgets(line, TAMANHO_LINHA_ARQUIVO, arq) != NULL) {
+      line[strcspn(line, "\n")] = 0;  // Remove o caractere de nova linha
+    }
+
+    while (fgets(line, TAMANHO_LINHA_ARQUIVO, arq) != NULL && i < MAX_POKEMONS) {
+      line[strcspn(line, "\n")] = 0;  // Remove o caractere de nova linha
+
+      if (sscanf(line, "%*d) %49[^\n]", jogador.pokemons[i].nome) == 1) {
+        //Pokemon_t pokemon = procurarPokemon(jogador.pokemons[i].nome);
+      } else {
+        printf("Erro ao extrair o nome do Pokémon na linha: %s\n", line);
+      }
+    }*/
   }
 }
 
