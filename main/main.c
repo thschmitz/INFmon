@@ -32,10 +32,14 @@ int main() {
 			menu_inicial();
 		} else if(menu_opcoes_rodando){
 			menu_opcoes();
+		} else if(menu_erro_rodando){
+			menu_erro();
 		} else {
 			leitura_movimentos();
-			if (IsKeyPressed(KEY_ESCAPE)) {
+			if (IsKeyPressed(KEY_TAB)) {
 				menu_opcoes_rodando = true;
+				menu_inicial_rodando = false;
+				menu_erro_rodando = false;
 			}
 			
 			camera.target.x = jogador.posicaoX;
@@ -52,6 +56,8 @@ int main() {
 			EndDrawing();
 			EndMode2D();
 		}
+
+
 	}
 
 	CloseWindow();

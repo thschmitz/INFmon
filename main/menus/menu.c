@@ -14,6 +14,11 @@ static const char *labelBotoesMenuOpcoes[] = {
   "VOLTAR TELA INICIAL"
 };
 
+static const char *labelBotoesMenuErro[] = {
+  "VOLTAR PRO JOGO",
+  "VOLTAR TELA INICIAL ( Salvamento automático )"
+};
+
 // Corrigindo a função measure_text para aceitar const char *
 int measure_text(const char *text, int tamanhoFonte) {
   return MeasureText(text, tamanhoFonte);
@@ -22,12 +27,20 @@ int measure_text(const char *text, int tamanhoFonte) {
 void menu_opcoes() {
   Texturas_t texturas;
   int selection = 0;
+  int erro;
   int menuOpen = true;
   texturas.ponteiroMenuInicialTexture = LoadTexture("./texturas/ponteiroMenuInicial.png"); 
 
   while (menuOpen) {
     ClearBackground(WHITE);
     BeginDrawing();
+
+		if (IsKeyPressed(KEY_TAB)) {
+      menu_inicial_rodando = false;
+      menu_erro_rodando = false;
+      menu_opcoes_rodando = false;
+      menuOpen = false;
+    }
 
     DrawText(tituloProjeto, larguraMonitor / 2 - (measure_text(tituloProjeto, TAMANHO_FONTE_TITULO_PRINCIPAL) / 2), 20, TAMANHO_FONTE_TITULO_PRINCIPAL, BLACK);
     for (int i = 0; i < 3; i++) {
@@ -68,10 +81,17 @@ void menu_opcoes() {
         break;
       case 1:
         // Salvar jogo
-        salvarJogo();
-        menu_inicial_rodando = false;
-        menu_opcoes_rodando = false;
-        menuOpen = false;
+        erro = salvarJogo();
+        if(erro){
+          menu_inicial_rodando = false;
+          menu_opcoes_rodando = false;
+          menu_erro_rodando = true;
+        } else {
+          menu_inicial_rodando = false;
+          menu_opcoes_rodando = false;
+          //menuOpen = false;
+        }
+        
         break;
       case 2:
         // Voltar menu inicial
@@ -85,10 +105,10 @@ void menu_opcoes() {
   }
 }
 
-
 void menu_inicial() {
   Texturas_t texturas;
   int selection = 0;
+  int erro;
   int menuOpen = true;
   texturas.ponteiroMenuInicialTexture = LoadTexture("./texturas/ponteiroMenuInicial.png"); 
 
@@ -135,14 +155,20 @@ void menu_inicial() {
         break;
       case 1:
         // Carregar Jogo
-        carregarJogo();
-        menu_inicial_rodando = false;
-        menuOpen = false;
+        erro = carregarJogo();
+        if(erro){
+          menu_inicial_rodando = false;
+          menu_erro_rodando = true;
+          menu_opcoes_rodando = false;
+        } else {
+          menu_inicial_rodando = false;
+          //menuOpen=true;
+        }
+        
         break;
       case 2:
         // Sair do jogo
         programa_rodando = false;
-        menuOpen = false;
         break;
       default:
         break;
@@ -150,59 +176,104 @@ void menu_inicial() {
   }
 }
 
-void salvarJogo(){
+int salvarJogo(){
   FILE *arq;
-  int i;
-  arq = fopen("data/bin.txt", "w");
+  int retorno;
+  arq = fopen("data/save.bin", "wb");
 
   if(arq == NULL) {
-    printf("Erro na criacao do arquivo .txt para salvamento dos dados\n");
+    printf("Erro na criacao do arquivo .bin para salvamento dos dados\n");
+    retorno = 1;
   } else {
-    //fprintf("Posicao Jogador:");
-    fprintf(arq, "X: %d, Y: %d", jogador.posicaoX, jogador.posicaoY);
-    /*fprintf("Pokemons:");
-    for(i=0; i<jogador.pokemons;i++){
-      fprintf("%d) %s\n", i+1, jogador.pokemons[i].nome);
-    }*/
+    retorno = 0;
+    fwrite(&jogador, sizeof(Jogador_t), 1, arq);
     fclose(arq);
   }
+
+  return retorno;
 }
 
-void carregarJogo(){
+int carregarJogo(){
   FILE *arq;
+  int retorno;
   char line[TAMANHO_LINHA_ARQUIVO];
-  arq = fopen("data/bin.txt", "r");
+  arq = fopen("data/save.bin", "rb");
 
   if(arq == NULL){
-    printf("Erro na leitura do arquivo .txt para salvamento dos dados\n");
+    printf("Erro na leitura do arquivo .bin para salvamento dos dados\n");
+    retorno = 1;
   } else {
-    if(fgets(line, TAMANHO_LINHA_ARQUIVO, arq) != NULL){
-      line[strcspn(line, "\n")] = 0;
-
-      if(sscanf(line, "X: %d, Y: %d", &jogador.posicaoX, &jogador.posicaoY) == 2){
-        printf("Sucesso ao extrair os valores!");
-      } else {
-        printf("Erro ao extrair os valores!");
-      }
-    }
-
-    /*if (fgets(line, TAMANHO_LINHA_ARQUIVO, arq) != NULL) {
-      line[strcspn(line, "\n")] = 0;  // Remove o caractere de nova linha
-    }
-
-    while (fgets(line, TAMANHO_LINHA_ARQUIVO, arq) != NULL && i < MAX_POKEMONS) {
-      line[strcspn(line, "\n")] = 0;  // Remove o caractere de nova linha
-
-      if (sscanf(line, "%*d) %49[^\n]", jogador.pokemons[i].nome) == 1) {
-        //Pokemon_t pokemon = procurarPokemon(jogador.pokemons[i].nome);
-      } else {
-        printf("Erro ao extrair o nome do Pokémon na linha: %s\n", line);
-      }
-    }*/
+    fread(&jogador, sizeof(Jogador_t), 1, arq);
+    retorno = 0;
   }
+
+  fclose(arq);
+
+  return retorno;
 }
 
 void novoJogo() {
   jogador.posicaoX = COLUNAS_MAPA * LADO / 2 - LADO;
 	jogador.posicaoY = LINHAS_MAPA * LADO / 2 - LADO;
+}
+
+void menu_erro() {
+  Texturas_t texturas;
+  int selection = 0;
+  int erro;
+  int menuOpen = true;
+  texturas.ponteiroMenuInicialTexture = LoadTexture("./texturas/ponteiroMenuInicial.png"); 
+
+  while (menuOpen) {
+    ClearBackground(WHITE);
+    BeginDrawing();
+
+    DrawText(tituloProjeto, larguraMonitor / 2 - (measure_text(tituloProjeto, TAMANHO_FONTE_TITULO_PRINCIPAL) / 2), 20, TAMANHO_FONTE_TITULO_PRINCIPAL, BLACK);
+    for (int i = 0; i < 2; i++) {
+      Color cor = (i == selection) ? RED : BLACK;
+      DrawText(labelBotoesMenuErro[i], larguraMonitor / 2 - (measure_text(labelBotoesMenuErro[i], TAMANHO_FONTE_OPCOES_MENU) / 2), alturaMonitor / 2 + i * 100, TAMANHO_FONTE_OPCOES_MENU, cor);
+      if (i == selection) {
+        int posX = (larguraMonitor / 2 - (measure_text(labelBotoesMenuInicial[i], TAMANHO_FONTE_OPCOES_MENU) / 2)) - texturas.ponteiroMenuInicialTexture.width - 10;
+        int posY = alturaMonitor / 2 + i * 100 - texturas.ponteiroMenuInicialTexture.height / 2;
+        DrawTexture(texturas.ponteiroMenuInicialTexture, posX, posY + 10, WHITE);
+      }
+    }
+
+    EndDrawing();
+
+    if (IsKeyPressed(KEY_DOWN)) {
+      selection++;
+      if (selection > 1) selection = 0;
+    }
+    if (IsKeyPressed(KEY_UP)) {
+      selection--;
+      if (selection < 0) selection = 1;
+    }
+
+    if (IsKeyPressed(KEY_ENTER)) {
+      menuOpen = false;
+    }
+  }
+
+  UnloadTexture(texturas.ponteiroMenuInicialTexture);
+
+  if (IsKeyPressed(KEY_ENTER)) {
+    switch (selection) {
+      case 0:
+        // Voltar pro jogo
+        menu_inicial_rodando = false;
+        menu_erro_rodando = false;
+        menu_opcoes_rodando = false;
+        break;
+      case 1:
+        // Voltar pro menu principal
+        menu_erro_rodando = false;
+        menu_inicial_rodando = true;
+        menu_opcoes_rodando = false;
+
+        break;
+      default:
+        break;
+    }
+  }
 }
