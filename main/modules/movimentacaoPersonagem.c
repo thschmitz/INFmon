@@ -82,8 +82,12 @@ void move(int dx, int dy)
 }
 
 int spawnar_grama(){
-	int chance = (rand() % 13);
+	int chance = (rand() %250);
 	if (chance == 7){
-		printf("batalha");
+		chance = 0;
+		menu_inicial_rodando = false;
+        menu_erro_rodando = false;
+        menu_opcoes_rodando = false;
+		menu_batalha_rodando = true;
 	}
 }

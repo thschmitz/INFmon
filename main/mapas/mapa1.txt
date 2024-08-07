@@ -6,7 +6,7 @@ A                         G                       G            A
 A                              G                              GA
 A                              G                              GA
 APPPPPPPPPPPPPPPPPPPPPPPPPPPPPPGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGA
-A                              G                    GGGGGGGGGGGA
+AGGGGGGGGGGGGGGGGGGGGG         G                    GGGGGGGGGGGA
 AGGGGGGGGGGGGGGGGG             G                  GGGGGGGGGGGGGA
 AGGGGGGGGGGGGGGGGGGGGG                         GGGGGGGGGGGGGGGGA
 AGGGGGGGGGGGGGGGGGGGGG                                        GA

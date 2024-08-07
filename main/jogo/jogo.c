@@ -32,7 +32,6 @@ void rodar_jogo(Camera2D *camera, Texturas_t *textura){
     //mostrar_tela_combate(charmander, squirtle);
     desenhador_mapa();
 
-
     DrawTexture(textura->personagemPrincipal, jogador.posicaoX, jogador.posicaoY, WHITE);
     EndMode2D();
     EndDrawing();

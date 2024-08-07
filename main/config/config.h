@@ -49,5 +49,6 @@ extern int menu_inicial_rodando;
 extern int menu_opcoes_rodando;
 extern int menu_erro_rodando;
 extern int programa_rodando;
+extern int menu_batalha_rodando;
 
 #endif

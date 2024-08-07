@@ -1,5 +1,4 @@
 #include "../config/config.h"
-#include <stdlib.h> // Para usar rand()
 
 static const char *labelBotoesCombate[] = {
     "FIGHT",
@@ -11,7 +10,7 @@ static const char *labelBotoesCombate[] = {
 int tentar_fuga() {
     int saiu = 0;
     int valorAleatorio = rand() % 9;
-    if(valorAleatorio <=3){
+    if(valorAleatorio <=6){
         saiu = 1;
     }
     return saiu;
@@ -70,6 +69,7 @@ void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fug
                     *combateAtivo = false;
                     menu_inicial_rodando = false;
                     menu_opcoes_rodando = false;
+                    menu_batalha_rodando = false;
                 } else {
                     desenhar_interface_dialogo("FUGA FALHOU!");
                     menu_inicial_rodando = false;

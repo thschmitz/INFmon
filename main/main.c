@@ -8,7 +8,10 @@ int main() {
 
 	jogador.posicaoX = COLUNAS_MAPA * LADO / 2;
 	jogador.posicaoY = LINHAS_MAPA * LADO / 2;
-	
+
+	Pokemon_t charmander = {100, 200, 5, "CHARMANDER", "FOGO"};
+    Pokemon_t squirtle = {100, 200, 2, "SQUIRTLE", "AGUA"};
+
 	Texturas_t texturas;
   	texturas.personagemPrincipal = LoadTexture("./texturas/sprite.png"); 
 
@@ -35,6 +38,8 @@ int main() {
 			menu_opcoes();
 		} else if(menu_erro_rodando){
 			menu_erro();
+		}else if(menu_batalha_rodando){
+			mostrar_tela_combate(charmander, squirtle);
 		} else {
 			rodar_jogo(&camera, &texturas);
 		}
