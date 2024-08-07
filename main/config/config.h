@@ -34,12 +34,15 @@
 #include "../interfaces/combate.h"
 
 // Declaração de variáveis globais
+extern unsigned int globalSeed;
 extern int larguraMonitor;
 extern int alturaMonitor;
 extern int posicaoX, posicaoY;
 extern const char tituloProjeto[10];
 extern Jogador_t jogador;
 extern Mapa_t mapa;
+
+void InitRandomSeed();
 
 // Estados do jogo
 extern int menu_inicial_rodando;

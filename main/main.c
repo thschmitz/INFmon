@@ -1,13 +1,14 @@
 #include "./config/config.h"
 
 int main() {
+	InitRandomSeed();
 	InitWindow(COLUNAS_MAPA * LADO, LINHAS_MAPA * LADO, tituloProjeto);
 	larguraMonitor = GetMonitorWidth(GetCurrentMonitor());
 	alturaMonitor = GetMonitorHeight(GetCurrentMonitor());
 
 	jogador.posicaoX = COLUNAS_MAPA * LADO / 2;
 	jogador.posicaoY = LINHAS_MAPA * LADO / 2;
-
+	
 	Texturas_t texturas;
   	texturas.personagemPrincipal = LoadTexture("./texturas/sprite.png"); 
 
@@ -19,7 +20,7 @@ int main() {
 	camera.target = position;
 	camera.offset = (Vector2){ larguraMonitor / 2.0f, alturaMonitor /2.0f };
 	camera.rotation = 0.0f;
-	camera.zoom = 4.0f;
+	camera.zoom = 5.0f;
 
 	bool fullscreen = false;
 	SetWindowSize(larguraMonitor, alturaMonitor);
@@ -38,7 +39,6 @@ int main() {
 			rodar_jogo(&camera, &texturas);
 		}
 	}
-
 	CloseWindow();
 	return 0;
 }

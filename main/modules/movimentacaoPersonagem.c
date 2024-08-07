@@ -4,7 +4,7 @@ void leitura_movimentos()
 {
 	int dx = 0;
 	int dy = 0;
-	float speed = 10.0f;
+	float speed = 8.0f;
 	float deltaTime = GetFrameTime();
 
 	if (IsKeyDown(KEY_RIGHT))
@@ -46,25 +46,31 @@ int deve_mover(int dx, int dy)
 		if (dx > 0){
 			mx = (int)(jogador.posicaoX / LADO);
 			my = (int)((jogador.posicaoY + 9) / LADO);
-			if (mapa.tiles[my][mx + 1] == 'G') mover = 0;
+			if (mapa.tiles[my][mx + 1] == 'W') mover = 0;
+			else if(mapa.tiles[my][mx + 1] == 'P') mover = 0;
 		} else if (dx < 0) {
 			mx = (int)((jogador.posicaoX + 19) / LADO);
 			my = (int)((jogador.posicaoY + 9) / LADO);
-			if (mapa.tiles[my][mx - 1] == 'G')mover = 0;
+			if (mapa.tiles[my][mx - 1] == 'W')mover = 0;
+			else if(mapa.tiles[my][mx - 1] == 'P') mover = 0;
 		}
 		if (dy > 0){
 			mx = (int)((jogador.posicaoX + 9) / LADO);
 			my = (int)(jogador.posicaoY / LADO);
-			if (mapa.tiles[my + 1][mx] == 'G')mover = 0;
+			if (mapa.tiles[my + 1][mx] == 'W')mover = 0;
 		}else if (dy < 0){
 			mx = (int)((jogador.posicaoX + 9) / LADO);
 			my = (int)((jogador.posicaoY + 19) / LADO);
-			if (mapa.tiles[my - 1][mx] == 'G') mover = 0;
+			if (mapa.tiles[my - 1][mx] == 'W') mover = 0;
+			else if(mapa.tiles[my - 1][mx] == 'P') mover = 0;
 		}
 	}
 
-	printf("%d %d\n", jogador.posicaoX, jogador.posicaoY);
-	printf("%d %d\n", mx,my);
+	if(mover){
+		mx = (int)((jogador.posicaoX + 9) / LADO);
+		my = (int)((jogador.posicaoY + 9) / LADO);
+		if (mapa.tiles[my][mx] == 'G') spawnar_grama();
+	}
 
 	return mover;
 }
@@ -73,4 +79,11 @@ void move(int dx, int dy)
 {
 	jogador.posicaoX += dx;
 	jogador.posicaoY += dy;
+}
+
+int spawnar_grama(){
+	int chance = (rand() % 13);
+	if (chance == 7){
+		printf("batalha");
+	}
 }
