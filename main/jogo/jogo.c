@@ -12,6 +12,8 @@ void rodar_jogo(Camera2D *camera, Texturas_t *textura){
     Pokemon_t charmander = {100, 200, 5, "CHARMANDER", "FOGO"};
     Pokemon_t squirtle = {100, 200, 2, "SQUIRTLE", "AGUA"};
 
+    //mostrar_tela_combate(charmander, squirtle);
+
     leitura_movimentos();
     if (IsKeyPressed(KEY_TAB)) {
         menu_opcoes_rodando = true;
@@ -30,11 +32,7 @@ void rodar_jogo(Camera2D *camera, Texturas_t *textura){
     ClearBackground(RAYWHITE);
     desenhar_mapa();
 
-    //mostrar_tela_combate(charmander, squirtle);
-
-
     DrawTexture(textura->personagemPrincipal, jogador.posicaoX, jogador.posicaoY, WHITE);
-    EndDrawing();
     EndMode2D();
     EndDrawing();
 }
