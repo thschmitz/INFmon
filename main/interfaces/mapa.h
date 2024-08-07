@@ -4,6 +4,6 @@
 #include "../config/config.h"
 
 void carregar_mapa();
-void desenhar_mapa();
+void desenhador_mapa();
 
 #endif // MAP_H

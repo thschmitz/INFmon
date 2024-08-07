@@ -1,3 +1,4 @@
 .vscode/settings copy.json
 /.vscode
 main/infmon.exe
+*.bin

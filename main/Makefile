@@ -13,16 +13,16 @@ LDIR = ..\lib
 LIBS = -lraylib -lwinmm -lgdi32
 
 # Header files
-_DEPS = config.h mapa.h menu.h movimentacaoPersonagem.h structs.h
+_DEPS = config.h mapa.h menu.h movimentacaoPersonagem.h structs.h jogo.h combate.h
 DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 DEPS += $(wildcard $(INTERFACE_DIR)/*.h)
 
 # Source files
-_SRC = main.c config/config.c mapa/mapa.c menus/menu.c modules/movimentacaoPersonagem.c
+_SRC = main.c config/config.c  mapa/mapa.c menus/menu.c modules/movimentacaoPersonagem.c jogo/jogo.c jogo/combate.c
 SRC = $(patsubst %,$(SDIR)/%,$(_SRC))
 
 # Object files
-_OBJ = main.o config/config.o mapa/mapa.o menus/menu.o modules/movimentacaoPersonagem.o
+_OBJ = main.o config/config.o mapa/mapa.o menus/menu.o modules/movimentacaoPersonagem.o jogo/jogo.o jogo/combate.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 # Executable name

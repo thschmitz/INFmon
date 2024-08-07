@@ -33,7 +33,7 @@ void carregar_mapa() {
     mapa.texturas.grassTexture = LoadTexture("texturas/grass.png");
 }
 
-void desenhar_mapa() {
+void desenhador_mapa() {
     for (int y = 0; y < LINHAS_MAPA; y++) {
         for (int x = 0; x < COLUNAS_MAPA; x++) {
             switch (mapa.tiles[y][x]) { 
@@ -45,6 +45,9 @@ void desenhar_mapa() {
                     break;
                 case 'J':
                     DrawTexture(mapa.texturas.playerTexture, x * mapa.texturas.playerTexture.width, y * mapa.texturas.playerTexture.height, WHITE);
+                    break;
+                case 'P':
+                    DrawTexture(mapa.texturas.wallTexture, x * mapa.texturas.wallTexture.width, y * mapa.texturas.wallTexture.height, WHITE);
                     break;
                 case 'G':
                     DrawTexture(mapa.texturas.grassTexture, x * mapa.texturas.grassTexture.width, y * mapa.texturas.grassTexture.height, WHITE);
