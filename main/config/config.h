@@ -30,6 +30,8 @@
 #include "../interfaces/movimentacaoPersonagem.h"
 #include "../interfaces/menu.h"
 #include "../interfaces/mapa.h"
+#include "../interfaces/jogo.h"
+#include "../interfaces/combate.h"
 
 // Declaração de variáveis globais
 extern int larguraMonitor;

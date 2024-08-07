@@ -81,7 +81,7 @@ void menu_opcoes() {
         break;
       case 1:
         // Salvar jogo
-        erro = salvarJogo();
+        erro = salvar_jogo();
         if(erro){
           menu_inicial_rodando = false;
           menu_opcoes_rodando = false;
@@ -149,13 +149,13 @@ void menu_inicial() {
     switch (selection) {
       case 0:
         // Novo Jogo
-        novoJogo();
+        novo_jogo();
         menu_inicial_rodando = false;
         menuOpen = false;
         break;
       case 1:
         // Carregar Jogo
-        erro = carregarJogo();
+        erro = carregar_jogo();
         if(erro){
           menu_inicial_rodando = false;
           menu_erro_rodando = true;
@@ -176,7 +176,7 @@ void menu_inicial() {
   }
 }
 
-int salvarJogo(){
+int salvar_jogo(){
   FILE *arq;
   int retorno;
   arq = fopen("data/save.bin", "wb");
@@ -193,7 +193,7 @@ int salvarJogo(){
   return retorno;
 }
 
-int carregarJogo(){
+int carregar_jogo(){
   FILE *arq;
   int retorno;
   char line[TAMANHO_LINHA_ARQUIVO];
@@ -212,7 +212,7 @@ int carregarJogo(){
   return retorno;
 }
 
-void novoJogo() {
+void novo_jogo() {
   jogador.posicaoX = COLUNAS_MAPA * LADO / 2 - LADO;
 	jogador.posicaoY = LINHAS_MAPA * LADO / 2 - LADO;
 }

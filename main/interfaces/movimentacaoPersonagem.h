@@ -2,7 +2,7 @@
 #define MOVIMENTACAO_PERSONAGEM_H
 
 void leitura_movimentos();
-int deveMover(int dx, int dy);
+int deve_mover(int dx, int dy);
 void move(int dx, int dy);
 
 #endif

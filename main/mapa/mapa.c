@@ -1,6 +1,6 @@
 #include "../config/config.h"
 
-void LoadMap() {
+void carregar_mapa() {
     mapa.fase_atual = 1;
     char nome_mapa[20] = "\0";
 
@@ -33,7 +33,7 @@ void LoadMap() {
     mapa.texturas.grassTexture = LoadTexture("texturas/grass.png");
 }
 
-void DrawMap() {
+void desenhar_mapa() {
     for (int y = 0; y < LINHAS_MAPA; y++) {
         for (int x = 0; x < COLUNAS_MAPA; x++) {
             switch (mapa.tiles[y][x]) { 
@@ -50,7 +50,6 @@ void DrawMap() {
                     DrawTexture(mapa.texturas.grassTexture, x * mapa.texturas.grassTexture.width, y * mapa.texturas.grassTexture.height, WHITE);
                     break;
                 default:
-                    //DrawTexture(mapa->texturas.groundTexture, x * mapa->texturas.groundTexture.width, y * mapa->texturas.groundTexture.height, WHITE);
                     break;
             }
         }

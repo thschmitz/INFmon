@@ -27,13 +27,13 @@ void leitura_movimentos()
 		dy = LADO * speed * deltaTime;
 	}
 
-	if (deveMover(dx, dy) == 1)
+	if (deve_mover(dx, dy) == 1)
 	{
 		move(dx, dy);
 	}
 }
 
-int deveMover(int dx, int dy)
+int deve_mover(int dx, int dy)
 {
 	int mx = jogador.posicaoX/LADO;
 	int my = jogador.posicaoY/LADO;

@@ -25,7 +25,7 @@ int main() {
 	SetWindowSize(larguraMonitor, alturaMonitor);
 	ToggleFullscreen();
 
-	LoadMap();
+	carregar_mapa();
 
 	while (!WindowShouldClose() && programa_rodando) {
 		if (menu_inicial_rodando) {
@@ -35,29 +35,8 @@ int main() {
 		} else if(menu_erro_rodando){
 			menu_erro();
 		} else {
-			leitura_movimentos();
-			if (IsKeyPressed(KEY_TAB)) {
-				menu_opcoes_rodando = true;
-				menu_inicial_rodando = false;
-				menu_erro_rodando = false;
-			}
-			
-			camera.target.x = jogador.posicaoX;
-			camera.target.y= jogador.posicaoY;
-			if (jogador.posicaoY < 140) camera.target.y = 140;
-        	else if (jogador.posicaoY > 580) camera.target.y = 580;
-        	if (jogador.posicaoX < 240) camera.target.x = 240;
-        	else if (jogador.posicaoX > 1040) camera.target.x = 1040;
-
-			BeginMode2D(camera);
-			ClearBackground(RAYWHITE);
-			DrawMap();
-			DrawTexture(texturas.personagemPrincipal, jogador.posicaoX, jogador.posicaoY, WHITE);
-			EndDrawing();
-			EndMode2D();
+			rodar_jogo(&camera, &texturas);
 		}
-
-
 	}
 
 	CloseWindow();

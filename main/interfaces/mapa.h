@@ -3,7 +3,7 @@
 
 #include "../config/config.h"
 
-void LoadMap();
-void DrawMap();
+void carregar_mapa();
+void desenhar_mapa();
 
 #endif // MAP_H

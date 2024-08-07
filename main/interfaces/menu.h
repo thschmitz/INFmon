@@ -4,8 +4,8 @@
 void menu_inicial();
 void menu_opcoes();
 void menu_erro();
-int salvarJogo();
-int carregarJogo();
-void novoJogo();
+int salvar_jogo();
+int carregar_jogo();
+void novo_jogo();
 
 #endif

@@ -39,8 +39,9 @@ typedef struct ataque {
     Essa struct engloba os elementos do pokemon
 */
 typedef struct pokemon {
-    Ataque_t ataques[QUANTIDADE_ATAQUES_POR_POKEMON];
+    //Ataque_t ataques[QUANTIDADE_ATAQUES_POR_POKEMON];
     float vida;
+    float vidaMaxima;
     int xp;
     char nome[QUANTIDADE_CARACTERES_NOME_POKEMON];
     char tipoPokemon[QUANTIDADE_CARACTERES_TIPO_POKEMON];
@@ -55,5 +56,13 @@ typedef struct jogador {
     int posicaoY;
 } Jogador_t;
 
+
+typedef struct interfaceCombate {
+    Rectangle optionsBox;
+    Rectangle fightBox;
+    Rectangle bagBox;
+    Rectangle pokemonBox;
+    Rectangle runBox;
+} InterfaceCombate_t;
 
 #endif
