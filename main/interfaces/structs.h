@@ -30,6 +30,7 @@ typedef struct mapa {
     Essa struct engloba os elementos do ataque
 */
 typedef struct ataque {
+    char nome[QUANTIDADE_CARACTERES_NOME_ATAQUE];
     float dano;
     int pp;
     char tipoAtaque[QUANTIDADE_CARACTERES_TIPO_ATAQUE];
@@ -39,7 +40,7 @@ typedef struct ataque {
     Essa struct engloba os elementos do pokemon
 */
 typedef struct pokemon {
-    //Ataque_t ataques[QUANTIDADE_ATAQUES_POR_POKEMON];
+    Ataque_t ataques[QUANTIDADE_ATAQUES_POR_POKEMON];
     float vida;
     float vidaMaxima;
     int xp;
@@ -63,6 +64,10 @@ typedef struct interfaceCombate {
     Rectangle bagBox;
     Rectangle pokemonBox;
     Rectangle runBox;
+    Rectangle ataque1;
+    Rectangle ataque2;
+    Rectangle ataque3;
+    Rectangle ataque4;
 } InterfaceCombate_t;
 
 #endif

@@ -13,6 +13,7 @@
 #define QUANTIDADE_CARACTERES_TIPO_POKEMON 20
 #define QUANTIDADE_CARACTERES_TIPO_ATAQUE 20
 #define QUANTIDADE_ATAQUES_POR_POKEMON 4
+#define QUANTIDADE_CARACTERES_NOME_ATAQUE 20
 
 //Defines de booleanos para facilitar a leitura
 #define true 1

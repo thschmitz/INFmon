@@ -9,8 +9,31 @@ int main() {
 	jogador.posicaoX = COLUNAS_MAPA * LADO / 2;
 	jogador.posicaoY = LINHAS_MAPA * LADO / 2;
 
-	Pokemon_t charmander = {100, 200, 5, "CHARMANDER", "FOGO"};
-    Pokemon_t squirtle = {100, 200, 2, "SQUIRTLE", "AGUA"};
+	Ataque_t ataque1 = {"TESTE1", 50.5, 42, "NORMAL"};
+	Ataque_t ataque2 = {"TESTE2", 12.5, 42, "NORMAL"};
+	Ataque_t ataque3 = {"TESTE3", 43.5, 42, "NORMAL"};
+	Ataque_t ataque4 = {"TESTE4", 89.5, 42, "NORMAL"};
+	Ataque_t ataque5 = {"TESTE5", 100.5, 42, "NORMAL"};
+	Ataque_t ataque6 = {"TESTE6", 34.5, 42, "NORMAL"};
+	Ataque_t ataques[] = {ataque1, ataque2, ataque3, ataque4, ataque5, ataque6};
+
+	Pokemon_t charmander = { 
+		.ataques = {ataque1, ataque2, ataque3, ataque4},
+		.vida = 100, 
+		.vidaMaxima = 200, 
+		.xp = 5, 
+		.nome = "CHARMANDER", 
+		.tipoPokemon = "FOGO"
+	};
+
+	Pokemon_t squirtle = { 
+		.ataques = {ataque1, ataque2, ataque3, ataque4},
+		.vida = 100, 
+		.vidaMaxima = 200, 
+		.xp = 2, 
+		.nome = "SQUIRTLE", 
+		.tipoPokemon = "AGUA"
+	};
 
 	Texturas_t texturas;
   	texturas.personagemPrincipal = LoadTexture("./texturas/sprite.png"); 
