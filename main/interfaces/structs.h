@@ -14,6 +14,18 @@ typedef struct texturas {
     Texture2D playerTexture;
     Texture2D grassTexture;
     Texture2D personagemPrincipal;
+    Texture2D churrasquinhoFrente;
+    Texture2D churrasquinhoCostas;
+    Texture2D choraoFrente;
+    Texture2D choraoCostas;
+    Texture2D gonzaguinhaFrente;
+    Texture2D gonzaguinhaCostas;
+    Texture2D graminhaFrente;
+    Texture2D graminhaCostas;
+    Texture2D morcegaoFrente;
+    Texture2D morcegaoCostas;
+    Texture2D zeusFrente;
+    Texture2D zeusCostas;
 
 } Texturas_t;
 

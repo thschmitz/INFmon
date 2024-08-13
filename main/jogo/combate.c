@@ -155,12 +155,12 @@ void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent) {
     int selection = 0;
 
     InterfaceCombate_t ui = {
-        .optionsBox = {0, 0, 0, 0},  
+        .optionsBox = {0, 0, 0, 0},
         .fightBox = {0, 0, 0, 0},
         .bagBox = {0, 0, 0, 0},
         .pokemonBox = {0, 0, 0, 0},
         .runBox = {0, 0, 0, 0},
-        .ataque1 = {0, 0, 0, 0}, 
+        .ataque1 = {0, 0, 0, 0},
         .ataque2 = {0, 0, 0, 0},
         .ataque3 = {0, 0, 0, 0},
         .ataque4 = {0, 0, 0, 0}
@@ -198,6 +198,7 @@ void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent) {
         int margemSuperior = alturaMonitor * 0.1;
         int margemLateral = larguraMonitor * 0.1;
 
+        //Exibe informações sobre o inimigo
         DrawText(opponent.nome, margemLateral, margemSuperior, 20, DARKGREEN);
         DrawText(TextFormat("Lv %d", opponent.xp), margemLateral + 200, margemSuperior, 20, DARKGREEN);
         DrawRectangle(margemLateral, margemSuperior + 30, larguraBarraHP, alturaBarraHP, LIGHTGRAY);
@@ -214,7 +215,7 @@ void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent) {
         } else {
             desenhar_opcoes_combate(&ui, &combateAtivo, &fugaBemSucedida, &selection, &menuAtaque);
         }
-        
+
         EndDrawing();
     }
 }

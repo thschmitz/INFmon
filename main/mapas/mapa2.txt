@@ -1,0 +1,43 @@
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+A                                 G           G                A
+A                                 G           G                A
+A      E                          G           G                A
+A                                 G           G                A
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA               A
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA               A
+A GGGGGGGGGGGGGGGGGGGG         GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGA
+A GGGGGGGGG                    GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGA
+A GGGGGG                       GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGA
+A G                            GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGA
+A                    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AGGGGGGGGGGGGGGGGGGGGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+A                    AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+A                                                              A
+AGGG          GGG         GGG         GGG        GGG           A
+AGGG          GGG         GGG         GGG        GGG           A
+AGGG          GGG         GGG         GGG        GGG           A
+A                                                              A
+A         GGG                GGG            GGG         GGG    A
+A         GGG                GGG            GGG         GGG    A
+A         GGG                GGG            GGG         GGG    A
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA                 A
+AGGGGGGGGGGGGGG         G      G           GGGGGGGGGGGGGGGGGGGGA
+AGGGGGGGGGGG            G      G                    GGGGGGGGGGGA
+AGGGGGGGGG              G      G                  GGGGGGGGGGGGGA
+AGGGGGG                 G      G               GGGGGGGGGGGGGGGGA
+AGGGGGG                 G      G             GGGGGGGGGGGGGGGGGGA
+AGGGGGG               AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AGGGGGG               AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AGGGGGG               AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AGGGGGG                 G      G                               A
+AGGGGGGGGG              G      G                               A
+AGGGGGGGGGGG            G      G                       J       A
+AGGGGGGGGGGGGGGGG       G      G                               A
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+
+a parede
+nada chão
+g grama
+j jogador
+e inimigo

@@ -1,6 +1,6 @@
 #include "../config/config.h"
 
-void leitura_movimentos()
+void leitura_movimentos() //movimentação do personagem principal
 {
 	int dx = 0;
 	int dy = 0;
@@ -33,7 +33,7 @@ void leitura_movimentos()
 	}
 }
 
-int deve_mover(int dx, int dy)
+int deve_mover(int dx, int dy) //define se o personagem principal pode se mover ou se tem algo o impedido
 {
 	int mx = jogador.posicaoX/LADO;
 	int my = jogador.posicaoY/LADO;
