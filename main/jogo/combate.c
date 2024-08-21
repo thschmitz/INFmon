@@ -3,26 +3,36 @@
 
 static const char *labelBotoesCombate[] = {
     "FIGHT",
-    "BAG",
+    "CAPTURE",
     "POKEMON",
     "RUN"
 };
 
-static const char *labelNovosComponentes[] = {
-    "ITEM 1",
-    "ITEM 2",
-    "ITEM 3",
-    "ITEM 4"
-};
-
-
 int tentar_fuga() {
     int saiu = 0;
     int valorAleatorio = rand() % 9;
-    if(valorAleatorio <=6){
+    if(valorAleatorio <= 6) {
         saiu = 1;
     }
     return saiu;
+}
+
+Texture2D selecionar_textura(Pokemon_t pokemon, Texturas_t texturas, bool costas) {
+    if (strcmp(pokemon.nome, "CHURRASQUINHO") == 0) {
+        return costas ? texturas.churrasquinhoCostas : texturas.churrasquinhoFrente;
+    } else if (strcmp(pokemon.nome, "CHORAO") == 0) {
+        return costas ? texturas.choraoCostas : texturas.choraoFrente;
+    } else if (strcmp(pokemon.nome, "GRAMINHA") == 0) {
+        return costas ? texturas.graminhaCostas : texturas.graminhaFrente;
+    } else if (strcmp(pokemon.nome, "MORCEGAO") == 0) {
+        return costas ? texturas.morcegaoCostas : texturas.morcegaoFrente;
+    } else if (strcmp(pokemon.nome, "GONZAGUINHA") == 0) {
+        return costas ? texturas.gonzaguinhaCostas : texturas.gonzaguinhaFrente;
+    } else if (strcmp(pokemon.nome, "ZEUS") == 0) {
+        return costas ? texturas.zeusCostas : texturas.zeusFrente;
+    } else {
+        return texturas.personagemPrincipal; // Retorna uma textura padrão caso não encontre o Pokémon
+    }
 }
 
 void desenhar_interface_dialogo(const char *mensagem) {
@@ -42,16 +52,16 @@ void desenhar_interface_dialogo(const char *mensagem) {
     DrawText(mensagem, xTexto + 1, yTexto + 1, 20, GRAY);
 }
 
-void selecionar_ataques_aleatorios(Pokemon_t *pokemon, Ataque_t ataquesSelecionados[]){
+void selecionar_ataques_aleatorios(Pokemon_t *pokemon, Ataque_t ataquesSelecionados[]) {
     int ataquesJaSelecionados[QUANTIDADE_ATAQUES_POR_POKEMON];
-    for(int i =0; i < QUANTIDADE_ATAQUES_POR_POKEMON;i++){
+    for(int i = 0; i < QUANTIDADE_ATAQUES_POR_POKEMON; i++) {
         ataquesJaSelecionados[i] = 0;
     }
 
     int count = 0;
-    while(count < NUMERO_ATAQUES){
+    while(count < NUMERO_ATAQUES) {
         int indiceAleatorio = rand() % QUANTIDADE_ATAQUES_POR_POKEMON;
-        if(!ataquesJaSelecionados[indiceAleatorio]){
+        if(!ataquesJaSelecionados[indiceAleatorio]) {
             ataquesSelecionados[count] = pokemon->ataques[indiceAleatorio];
             ataquesJaSelecionados[indiceAleatorio] = 1;
             count++;
@@ -59,7 +69,105 @@ void selecionar_ataques_aleatorios(Pokemon_t *pokemon, Ataque_t ataquesSeleciona
     }
 }
 
-void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fugaBemSucedida, int *selection, int *menuAtaque) {
+void desenha_pokemons_jogador(Pokemon_t *player, Texturas_t *texturas, Texture2D *texturaPlayer) {
+    int selection = 0;
+    int menuOpen = true;
+    int espacamentoVertical = 120; // Espaçamento maior entre as opções
+    int larguraImagem = 50; // Largura padrão para todas as imagens
+    int alturaImagem = 50;  // Altura padrão para todas as imagens
+    int margem = 20; // Margem entre elementos
+
+    texturas->ponteiroMenuInicialTexture = LoadTexture("./texturas/ponteiroMenuInicial.png");
+
+    while (menuOpen) {
+        BeginDrawing();
+        ClearBackground(WHITE);
+
+        if (IsKeyPressed(KEY_TAB)) {
+            menu_inicial_rodando = false;
+            menu_erro_rodando = false;
+            menu_opcoes_rodando = false;
+            menuOpen = false;
+        }
+
+        // Exibe a lista de Pokémons do jogador
+        for (int i = 0; i <= QUANTIDADE_POKEMONS_POR_JOGADOR; i++) {
+            Color cor = (i == selection) ? RED : BLACK;
+            int posYTexto = alturaMonitor / 4 + i * espacamentoVertical;
+            int posXTexto = 0;
+
+            if (i < QUANTIDADE_POKEMONS_POR_JOGADOR && strlen(jogador.pokemons[i].nome) > 0) {
+                // Calcula a largura do texto para centralizar
+                int larguraTexto = MeasureText(jogador.pokemons[i].nome, TAMANHO_FONTE_OPCOES_MENU);
+
+                // Posição X centralizada para o texto
+                int posXCentralizado = larguraMonitor / 2;
+
+                // Desenha o nome do Pokémon centralizado
+                posXTexto = posXCentralizado - (larguraTexto + larguraImagem + margem) / 2;
+                DrawText(jogador.pokemons[i].nome, posXTexto, posYTexto, TAMANHO_FONTE_OPCOES_MENU, cor);
+
+                // Desenha a barra de vida abaixo do nome, centralizada
+                int larguraBarraVida = 200;
+                int alturaBarraVida = 20;
+                int posXBarra = posXTexto + larguraTexto + margem;
+                int posYBarra = posYTexto + (TAMANHO_FONTE_OPCOES_MENU / 2) - (alturaBarraVida / 2);
+                DrawRectangle(posXBarra, posYBarra, larguraBarraVida, alturaBarraVida, LIGHTGRAY);
+                DrawRectangle(posXBarra, posYBarra, (int)(larguraBarraVida * (jogador.pokemons[i].vida / jogador.pokemons[i].vidaMaxima)), alturaBarraVida, GREEN);
+
+                // Determina a textura correta para o Pokémon
+                Texture2D imagemPokemon;
+                imagemPokemon = selecionar_textura(jogador.pokemons[i], *texturas, false);
+
+                // Desenha a imagem do Pokémon à direita da barra de vida
+                int posXImagem = posXBarra + larguraBarraVida + margem;
+                int posYImagem = posYTexto - 10; // Ajusta a posição Y para centralizar verticalmente com o texto
+                DrawTexturePro(imagemPokemon, (Rectangle){0, 0, imagemPokemon.width, imagemPokemon.height},
+                               (Rectangle){posXImagem, posYImagem, larguraImagem, alturaImagem}, 
+                               (Vector2){0, 0}, 0.0f, WHITE);
+            } else if (i == QUANTIDADE_POKEMONS_POR_JOGADOR) {
+                // Desenha a opção "Voltar" no final da lista
+                int larguraTexto = MeasureText("Voltar", TAMANHO_FONTE_OPCOES_MENU);
+                posXTexto = (larguraMonitor / 2) - (larguraTexto / 2);
+                DrawText("Voltar", posXTexto, posYTexto, TAMANHO_FONTE_OPCOES_MENU, cor);
+            }
+
+            if (i == selection) {
+                // Ajusta a posição do ponteiro para o início do texto
+                int posXPonteiro = posXTexto - texturas->ponteiroMenuInicialTexture.width - margem;
+                int posYPonteiro = posYTexto - 10;
+                DrawTexture(texturas->ponteiroMenuInicialTexture, posXPonteiro, posYPonteiro, WHITE);
+            }
+        }
+
+        EndDrawing();
+
+        if (IsKeyPressed(KEY_DOWN)) {
+            selection++;
+            if (selection > QUANTIDADE_POKEMONS_POR_JOGADOR) selection = 0;
+        }
+        if (IsKeyPressed(KEY_UP)) {
+            selection--;
+            if (selection < 0) selection = QUANTIDADE_POKEMONS_POR_JOGADOR;
+        }
+
+        if (IsKeyPressed(KEY_ENTER)) {
+            if (selection == QUANTIDADE_POKEMONS_POR_JOGADOR) {
+                // Voltar ao menu de combate
+                menuOpen = false;
+            } else {
+                // Seleciona o Pokémon
+                *player = jogador.pokemons[selection];
+                *texturaPlayer = selecionar_textura(jogador.pokemons[selection], *texturas, true);
+                menuOpen = false;
+            }
+        }
+    }
+
+    UnloadTexture(texturas->ponteiroMenuInicialTexture);
+}
+
+void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fugaBemSucedida, int *selection, int *menuAtaque, int *menuPokemonsDisponiveis) {
     Rectangle boxes[] = {ui->fightBox, ui->bagBox, ui->pokemonBox, ui->runBox};
 
     for (int i = 0; i < NUMERO_ATAQUES; i++) {
@@ -78,17 +186,15 @@ void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fug
     if (IsKeyPressed(KEY_ENTER)) {
         switch (*selection) {
             case 0:
-                // Implementar ação do botão "FIGHT"
                 *menuAtaque = true;
-                //*combateAtivo = false;
                 break;
             case 1:
-                // Implementar ação do botão "BAG"
+                // Implementar ação do botão "CAPTURE"
                 *combateAtivo = false;
                 break;
             case 2:
                 // Implementar ação do botão "POKEMON"
-                *combateAtivo = false;
+                *menuPokemonsDisponiveis = true;
                 break;
             case 3:
                 if (tentar_fuga()) {
@@ -99,8 +205,6 @@ void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fug
                     menu_batalha_rodando = false;
                 } else {
                     desenhar_interface_dialogo("FUGA FALHOU!");
-                    menu_inicial_rodando = false;
-                    menu_opcoes_rodando = false;
                     EndDrawing();
                     WaitTime(2); // Mensagem fica visível durante 2 segundos
                 }
@@ -111,9 +215,29 @@ void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fug
     }
 }
 
-void desenhar_opcoes_ataque(InterfaceCombate_t *ui, int *selection, int *menuAtaque, Pokemon_t pokemon, Ataque_t ataquesSelecionados[]) {
-    Rectangle boxes[] = {ui->ataque1, ui->ataque2, ui->ataque3, ui->ataque4};
+void escolher_novo_pokemon_inimigo(Pokemon_t *opponent, Pokemon_t timeInimigo[], int quantidadePokemons) {
+    int indiceAleatorio;
+    int pokemonEscolhido = 0;
 
+    // Tenta escolher um Pokémon aleatoriamente até encontrar um com vida > 0
+    while (!pokemonEscolhido) {
+        indiceAleatorio = rand() % quantidadePokemons; // Escolhe um índice aleatório
+        if (timeInimigo[indiceAleatorio].vida > 0) {
+            *opponent = timeInimigo[indiceAleatorio];
+            desenhar_interface_dialogo(TextFormat("O oponente escolheu %s!", opponent->nome));
+            pokemonEscolhido = 1;
+        }
+    }
+
+    // Caso todos os Pokémons do oponente estejam derrotados (isso deve ser tratado antes)
+    if (!pokemonEscolhido) {
+        desenhar_interface_dialogo("Você derrotou todos os Pokémons do oponente!");
+        // Aqui você pode adicionar lógica para finalizar a batalha, como retornar para o menu principal
+    }
+}
+
+void desenhar_opcoes_ataque(InterfaceCombate_t *ui, int *selection, int *menuAtaque, Pokemon_t player, Ataque_t ataquesSelecionados[], Pokemon_t *opponent) {
+    Rectangle boxes[] = {ui->ataque1, ui->ataque2, ui->ataque3, ui->ataque4};
 
     for (int i = 0; i < NUMERO_ATAQUES; i++) {
         Color cor = (i == *selection) ? RED : DARKGRAY;
@@ -127,33 +251,20 @@ void desenhar_opcoes_ataque(InterfaceCombate_t *ui, int *selection, int *menuAta
     if (IsKeyPressed(KEY_LEFT) && *selection > 0) (*selection)--;
 
     if (IsKeyPressed(KEY_ENTER)) {
-        switch (*selection) {
-            case 0:
-                // Implementar ação do ITEM 1
-                break;
-            case 1:
-                // Implementar ação do ITEM 2
-                break;
-            case 2:
-                // Implementar ação do ITEM 3
-                break;
-            case 3:
-                // Implementar ação do ITEM 4
-                break;
-            default:
-                break;
-        }
+        // Implementar ações específicas ao selecionar um ataque
+        opponent->vida -= ataquesSelecionados[*selection].dano * (1 - (opponent->defesa - player.ataque) / 100);
 
         *menuAtaque = false;
     }
 }
 
-void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent) {
+void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent, Texturas_t texturas) {
     int combateAtivo = true;
     int fugaBemSucedida = false;
     int menuAtaque = false;
+    int menuPokemonsDisponiveis = false;
     int selection = 0;
-
+    
     InterfaceCombate_t ui = {
         .optionsBox = {0, 0, 0, 0},
         .fightBox = {0, 0, 0, 0},
@@ -188,8 +299,17 @@ void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent) {
     ui.ataque3 = (Rectangle){3 * espacamentoOpcoes + 2 * larguraOpcoes, yBase, larguraOpcoes, alturaOpcoes};
     ui.ataque4 = (Rectangle){4 * espacamentoOpcoes + 3 * larguraOpcoes, yBase, larguraOpcoes, alturaOpcoes};
 
-    Ataque_t ataquesSelecionados[4];
+    // Seleciona os ataques aleatórios
+    Ataque_t ataquesSelecionados[NUMERO_ATAQUES];
     selecionar_ataques_aleatorios(&player, ataquesSelecionados);
+
+    // Determina as texturas do jogador e do oponente
+    Texture2D texturaPlayer;
+    Texture2D texturaOpponent;
+
+    // Aqui você deve associar a textura correta do jogador
+    texturaPlayer = selecionar_textura(player, texturas, true);
+    texturaOpponent = selecionar_textura(opponent, texturas, false);
 
     while (combateAtivo) {
         BeginDrawing();
@@ -198,7 +318,7 @@ void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent) {
         int margemSuperior = alturaMonitor * 0.1;
         int margemLateral = larguraMonitor * 0.1;
 
-        //Exibe informações sobre o inimigo
+        // Exibe informações sobre o inimigo
         DrawText(opponent.nome, margemLateral, margemSuperior, 20, DARKGREEN);
         DrawText(TextFormat("Lv %d", opponent.xp), margemLateral + 200, margemSuperior, 20, DARKGREEN);
         DrawRectangle(margemLateral, margemSuperior + 30, larguraBarraHP, alturaBarraHP, LIGHTGRAY);
@@ -210,13 +330,25 @@ void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent) {
         DrawRectangle(barraVidaX, barraVidaY, larguraBarraHP, alturaBarraHP, LIGHTGRAY);
         DrawRectangle(barraVidaX, barraVidaY, (int)(larguraBarraHP * (float)player.vida / player.vidaMaxima), alturaBarraHP, RED);
 
-        if(menuAtaque == true){
-            desenhar_opcoes_ataque(&ui, &selection, &menuAtaque, player, ataquesSelecionados);
+        // Desenha a imagem do Pokémon do jogador (à esquerda) em um tamanho maior (200x200)
+        DrawTexturePro(texturaPlayer, (Rectangle){0, 0, texturaPlayer.width, texturaPlayer.height},
+                       (Rectangle){larguraMonitor / 4 - 100, alturaMonitor / 2, 200, 200}, 
+                       (Vector2){0, 0}, 0.0f, WHITE);
+
+        // Desenha a imagem do Pokémon oponente (à direita) em um tamanho maior (200x200)
+        DrawTexturePro(texturaOpponent, (Rectangle){0, 0, texturaOpponent.width, texturaOpponent.height},
+                       (Rectangle){(larguraMonitor * 3 / 4) - 100, alturaMonitor / 4, 200, 200}, 
+                       (Vector2){0, 0}, 0.0f, WHITE);
+
+        if (menuAtaque) {
+            desenhar_opcoes_ataque(&ui, &selection, &menuAtaque, player, ataquesSelecionados, &opponent);
+        } else if (menuPokemonsDisponiveis) {
+            desenha_pokemons_jogador(&player, &texturas, &texturaPlayer);
+            menuPokemonsDisponiveis = false;
         } else {
-            desenhar_opcoes_combate(&ui, &combateAtivo, &fugaBemSucedida, &selection, &menuAtaque);
+            desenhar_opcoes_combate(&ui, &combateAtivo, &fugaBemSucedida, &selection, &menuAtaque, &menuPokemonsDisponiveis);
         }
 
         EndDrawing();
     }
 }
-

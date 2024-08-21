@@ -1,6 +1,6 @@
 #include "../config/config.h"
 
-void leitura_movimentos() //movimentação do personagem principal
+void leitura_movimentos(int *selvagem) //movimentaï¿½ï¿½o do personagem principal
 {
 	int dx = 0;
 	int dy = 0;
@@ -27,13 +27,13 @@ void leitura_movimentos() //movimentação do personagem principal
 		dy = LADO * speed * deltaTime;
 	}
 
-	if (deve_mover(dx, dy) == 1)
+	if (deve_mover(dx, dy, selvagem) == 1)
 	{
 		move(dx, dy);
 	}
 }
 
-int deve_mover(int dx, int dy) //define se o personagem principal pode se mover ou se tem algo o impedido
+int deve_mover(int dx, int dy, int *selvagem) //define se o personagem principal pode se mover ou se tem algo o impedido
 {
 	int mx = jogador.posicaoX/LADO;
 	int my = jogador.posicaoY/LADO;
@@ -69,7 +69,9 @@ int deve_mover(int dx, int dy) //define se o personagem principal pode se mover 
 	if(mover){
 		mx = (int)((jogador.posicaoX + 9) / LADO);
 		my = (int)((jogador.posicaoY + 9) / LADO);
-		if (mapa.tiles[my][mx] == 'G') spawnar_grama();
+		if (mapa.tiles[my][mx] == 'G'){
+			*selvagem = spawnar_grama();
+		}
 	}
 
 	return mover;
@@ -90,4 +92,6 @@ int spawnar_grama(){
         menu_opcoes_rodando = false;
 		menu_batalha_rodando = true;
 	}
+
+	return 1;
 }

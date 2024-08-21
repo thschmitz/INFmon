@@ -53,8 +53,10 @@ typedef struct ataque {
 */
 typedef struct pokemon {
     Ataque_t ataques[QUANTIDADE_ATAQUES_POR_POKEMON];
+    float defesa;
     float vida;
     float vidaMaxima;
+    float ataque;
     int xp;
     char nome[QUANTIDADE_CARACTERES_NOME_POKEMON];
     char tipoPokemon[QUANTIDADE_CARACTERES_TIPO_POKEMON];

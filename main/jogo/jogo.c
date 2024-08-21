@@ -8,8 +8,8 @@ typedef struct Interface {
     Rectangle runBox;
 } Interface;
 
-void rodar_jogo(Camera2D *camera, Texturas_t *textura){
-    leitura_movimentos();
+void rodar_jogo(Camera2D *camera, Texturas_t *textura, int *selvagem){
+    leitura_movimentos(selvagem);
     if (IsKeyPressed(KEY_TAB)) {
         menu_opcoes_rodando = true;
         menu_inicial_rodando = false;
