@@ -24,7 +24,7 @@ int measure_text(const char *text, int tamanhoFonte) {
   return MeasureText(text, tamanhoFonte);
 }
 
-void menu_opcoes() {
+void menu_opcoes(Jogador_t *jogadorPrincipal) {
   Texturas_t texturas;
   int selection = 0;
   int erro;
@@ -81,7 +81,7 @@ void menu_opcoes() {
         break;
       case 1:
         // Salvar jogo
-        erro = salvar_jogo();
+        erro = salvar_jogo(jogadorPrincipal);
         if(erro){
           menu_inicial_rodando = false;
           menu_opcoes_rodando = false;
@@ -105,7 +105,7 @@ void menu_opcoes() {
   }
 }
 
-void menu_inicial() {
+void menu_inicial(Jogador_t *jogadorPrincipal) {
   Texturas_t texturas;
   int selection = 0;
   int erro;
@@ -149,13 +149,13 @@ void menu_inicial() {
     switch (selection) {
       case 0:
         // Novo Jogo
-        novo_jogo();
+        novo_jogo(jogadorPrincipal);
         menu_inicial_rodando = false;
         menuOpen = false;
         break;
       case 1:
         // Carregar Jogo
-        erro = carregar_jogo();
+        erro = carregar_jogo(jogadorPrincipal);
         if(erro){
           menu_inicial_rodando = false;
           menu_erro_rodando = true;
@@ -176,7 +176,7 @@ void menu_inicial() {
   }
 }
 
-int salvar_jogo(){
+int salvar_jogo(Jogador_t *jogadorPrincipal){
   FILE *arq;
   int retorno;
   arq = fopen("data/save.bin", "wb");
@@ -186,14 +186,14 @@ int salvar_jogo(){
     retorno = 1;
   } else {
     retorno = 0;
-    fwrite(&jogador, sizeof(Jogador_t), 1, arq);
+    fwrite(jogadorPrincipal, sizeof(Jogador_t), 1, arq);
     fclose(arq);
   }
 
   return retorno;
 }
 
-int carregar_jogo(){
+int carregar_jogo(Jogador_t *jogadorPrincipal){
   FILE *arq;
   int retorno;
   char line[TAMANHO_LINHA_ARQUIVO];
@@ -203,7 +203,7 @@ int carregar_jogo(){
     printf("Erro na leitura do arquivo .bin para salvamento dos dados\n");
     retorno = 1;
   } else {
-    fread(&jogador, sizeof(Jogador_t), 1, arq);
+    fread(jogadorPrincipal, sizeof(Jogador_t), 1, arq);
     retorno = 0;
   }
 
@@ -212,9 +212,9 @@ int carregar_jogo(){
   return retorno;
 }
 
-void novo_jogo() {
-  jogador.posicaoX = COLUNAS_MAPA * LADO / 2 - LADO;
-	jogador.posicaoY = LINHAS_MAPA * LADO / 2 - LADO;
+void novo_jogo(Jogador_t *jogadorPrincipal) {
+  jogadorPrincipal->posicaoX = COLUNAS_MAPA * LADO / 2 - LADO;
+	jogadorPrincipal->posicaoY = LINHAS_MAPA * LADO / 2 - LADO;
 }
 
 void menu_erro() {

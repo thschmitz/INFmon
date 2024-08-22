@@ -1,6 +1,6 @@
 #include "../config/config.h"
 
-void leitura_movimentos(int *selvagem) //movimenta��o do personagem principal
+void leitura_movimentos(int *selvagem, Jogador_t *jogadorPrincipal) //movimenta��o do personagem principal
 {
 	int dx = 0;
 	int dy = 0;
@@ -27,48 +27,48 @@ void leitura_movimentos(int *selvagem) //movimenta��o do personagem principa
 		dy = LADO * speed * deltaTime;
 	}
 
-	if (deve_mover(dx, dy, selvagem) == 1)
+	if (deve_mover(dx, dy, selvagem, jogadorPrincipal) == 1)
 	{
-		move(dx, dy);
+		move(dx, dy, jogadorPrincipal);
 	}
 }
 
-int deve_mover(int dx, int dy, int *selvagem) //define se o personagem principal pode se mover ou se tem algo o impedido
+int deve_mover(int dx, int dy, int *selvagem, Jogador_t *jogadorPrincipal) //define se o personagem principal pode se mover ou se tem algo o impedido
 {
-	int mx = jogador.posicaoX/LADO;
-	int my = jogador.posicaoY/LADO;
+	int mx = jogadorPrincipal->posicaoX/LADO;
+	int my = jogadorPrincipal->posicaoY/LADO;
 	int mover;
 
-	if (jogador.posicaoX + dx < 20 || jogador.posicaoX + dx > (COLUNAS_MAPA * LADO) - 2*LADO || jogador.posicaoY + dy < 20 || jogador.posicaoY + dy > (LINHAS_MAPA * LADO) - 2*LADO){
+	if (jogadorPrincipal->posicaoX + dx < 20 || jogadorPrincipal->posicaoX + dx > (COLUNAS_MAPA * LADO) - 2*LADO || jogadorPrincipal->posicaoY + dy < 20 || jogadorPrincipal->posicaoY + dy > (LINHAS_MAPA * LADO) - 2*LADO){
 		mover = 0;
 	}else{
 		mover = 1;
 		if (dx > 0){
-			mx = (int)(jogador.posicaoX / LADO);
-			my = (int)((jogador.posicaoY + 9) / LADO);
+			mx = (int)(jogadorPrincipal->posicaoX / LADO);
+			my = (int)((jogadorPrincipal->posicaoY + 9) / LADO);
 			if (mapa.tiles[my][mx + 1] == 'W') mover = 0;
 			else if(mapa.tiles[my][mx + 1] == 'P') mover = 0;
 		} else if (dx < 0) {
-			mx = (int)((jogador.posicaoX + 19) / LADO);
-			my = (int)((jogador.posicaoY + 9) / LADO);
+			mx = (int)((jogadorPrincipal->posicaoX + 19) / LADO);
+			my = (int)((jogadorPrincipal->posicaoY + 9) / LADO);
 			if (mapa.tiles[my][mx - 1] == 'W')mover = 0;
 			else if(mapa.tiles[my][mx - 1] == 'P') mover = 0;
 		}
 		if (dy > 0){
-			mx = (int)((jogador.posicaoX + 9) / LADO);
-			my = (int)(jogador.posicaoY / LADO);
+			mx = (int)((jogadorPrincipal->posicaoX + 9) / LADO);
+			my = (int)(jogadorPrincipal->posicaoY / LADO);
 			if (mapa.tiles[my + 1][mx] == 'W')mover = 0;
 		}else if (dy < 0){
-			mx = (int)((jogador.posicaoX + 9) / LADO);
-			my = (int)((jogador.posicaoY + 19) / LADO);
+			mx = (int)((jogadorPrincipal->posicaoX + 9) / LADO);
+			my = (int)((jogadorPrincipal->posicaoY + 19) / LADO);
 			if (mapa.tiles[my - 1][mx] == 'W') mover = 0;
 			else if(mapa.tiles[my - 1][mx] == 'P') mover = 0;
 		}
 	}
 
 	if(mover){
-		mx = (int)((jogador.posicaoX + 9) / LADO);
-		my = (int)((jogador.posicaoY + 9) / LADO);
+		mx = (int)((jogadorPrincipal->posicaoX + 9) / LADO);
+		my = (int)((jogadorPrincipal->posicaoY + 9) / LADO);
 		if (mapa.tiles[my][mx] == 'G'){
 			*selvagem = spawnar_grama();
 		}
@@ -77,10 +77,10 @@ int deve_mover(int dx, int dy, int *selvagem) //define se o personagem principal
 	return mover;
 }
 
-void move(int dx, int dy)
+void move(int dx, int dy, Jogador_t *jogadorPrincipal)
 {
-	jogador.posicaoX += dx;
-	jogador.posicaoY += dy;
+	jogadorPrincipal->posicaoX += dx;
+	jogadorPrincipal->posicaoY += dy;
 }
 
 int spawnar_grama(){

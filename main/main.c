@@ -125,9 +125,9 @@ int main() {
 
     while (!WindowShouldClose() && programa_rodando) {
         if (menu_inicial_rodando) {
-            menu_inicial();
+            menu_inicial(&jogadorPrincipal);
         } else if (menu_opcoes_rodando) {
-            menu_opcoes();
+            menu_opcoes(&jogadorPrincipal);
         } else if (menu_erro_rodando) {
             menu_erro();
         } else if (menu_batalha_rodando) {
@@ -138,7 +138,7 @@ int main() {
             }
 
         } else {
-            rodar_jogo(&camera, &texturas, &selvagem);
+            rodar_jogo(&camera, &texturas, &selvagem, &jogadorPrincipal);
         }
     }
 
