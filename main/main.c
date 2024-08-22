@@ -21,7 +21,7 @@ int main() {
 	Pokemon_t charmander = {
 		.ataques = {ataque1, ataque2, ataque3, ataque4},
 		.defesa = 20,
-		.vida = 100,
+		.vida = 10,
 		.vidaMaxima = 200,
 		.xp = 5,
 		.nome = "CHURRASQUINHO",

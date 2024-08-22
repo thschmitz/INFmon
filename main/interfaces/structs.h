@@ -60,7 +60,7 @@ typedef struct pokemon {
     int xp;
     char nome[QUANTIDADE_CARACTERES_NOME_POKEMON];
     char tipoPokemon[QUANTIDADE_CARACTERES_TIPO_POKEMON];
-} Pokemon_t;
+}   Pokemon_t;
 
 /*
     Essa struct engloba os elementos do jogador
