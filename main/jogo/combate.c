@@ -22,10 +22,10 @@ Jogador_t configurar_oponente(Jogador_t jogador, Jogador_t jogadorPrincipal){
     int r;
     int i;
 
-    for(i = 0, i<2, i++){
+    for(i = 0; i<2; i++){
 	    r = (rand() %6);
         oponent.pokemons[i] = jogador.pokemons[r];
-        oponent.pokemons[i].xp = jogadorPrincipal.pokemon[0].xp + 100*((rand()%7)-3);
+        oponent.pokemons[i].xp = jogadorPrincipal.pokemons[0].xp + 100*((rand()%7)-3);
     }
 
     return oponent;
@@ -376,7 +376,7 @@ void desenhar_opcoes_ataque(InterfaceCombate_t *ui, int *selection, int *menuAta
             desenhar_interface_dialogo(TextFormat("Voce derrotou %s!", opponent->nome));
 
             // Ganhar XP
-            player->xp += 50*(1-((opponent->xp/100) - (player.xp/100));
+            player->xp += 50*(1-((opponent->xp/100) - (player->xp/100)));
 
             // Regenerar a vida de todos os Pokémons do jogador ao iniciar a batalha
             for (int i = 0; i < QUANTIDADE_POKEMONS_POR_JOGADOR; i++) {
@@ -562,7 +562,7 @@ void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent, Texturas_t textu
 
         // Desenhando a barra de vida do jogador acima das opções
         DrawText(player.nome, barraVidaX, barraVidaY - 20, 20, DARKGREEN);
-        DrawText(TextFormat("Lv %d", (int)(player.xp/qoo)), barraVidaX + larguraBarraHP - 100, barraVidaY - 20, 20, DARKGREEN);
+        DrawText(TextFormat("Lv %d", (int)(player.xp/100)), barraVidaX + larguraBarraHP - 100, barraVidaY - 20, 20, DARKGREEN);
         DrawRectangle(barraVidaX, barraVidaY, larguraBarraHP, alturaBarraHP, LIGHTGRAY);
         DrawRectangle(barraVidaX, barraVidaY, (int)(larguraBarraHP * (float)player.vida / player.vidaMaxima), alturaBarraHP, RED);
 

@@ -108,6 +108,8 @@ int main() {
 	jogador.pokemons[4] = pikachu;
 	jogador.pokemons[5] = zubat;
 
+    jogadorPrincipal.pokemons[0] = graminha;
+
     Texturas_t texturas;
     texturas.personagemPrincipal = LoadTexture("texturas/personagem_infmon.png"); // personagem principal
     texturas.churrasquinhoFrente = LoadTexture("texturas/churrasquinho_invertido.png"); // churrasquinho
