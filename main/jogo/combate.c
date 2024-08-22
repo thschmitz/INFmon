@@ -320,8 +320,17 @@ void desenhar_opcoes_ataque(InterfaceCombate_t *ui, int *selection, int *menuAta
             desenhar_interface_dialogo(TextFormat("Voce derrotou %s!", opponent->nome));
 
             // Ganhar XP
+            // Regenerar a vida de todos os Pokémons do jogador ao iniciar a batalha
             for (int i = 0; i < QUANTIDADE_POKEMONS_POR_JOGADOR; i++) {
                 jogadorPrincipal->pokemons[i].vida = jogadorPrincipal->pokemons[i].vidaMaxima;
+            }
+
+            // Atualiza o Pokémon principal (player) para refletir a vida regenerada
+            for (int i = 0; i < QUANTIDADE_POKEMONS_POR_JOGADOR; i++) {
+                if (strcmp(player->nome, jogadorPrincipal->pokemons[i].nome) == 0) {
+                    player->vida = jogadorPrincipal->pokemons[i].vidaMaxima;
+                    break;
+                }
             }
 
             menu_batalha_rodando = false;
@@ -467,6 +476,13 @@ void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent, Texturas_t textu
     // Aqui você deve associar a textura correta do jogador
     texturaPlayer = selecionar_textura(player, texturas, true);
     texturaOpponent = selecionar_textura(opponent, texturas, false);
+    // Atualiza o Pokémon principal (player) para refletir a vida regenerada
+    for (int i = 0; i < QUANTIDADE_POKEMONS_POR_JOGADOR; i++) {
+        if (strcmp(player.nome, jogadorPrincipal->pokemons[i].nome) == 0) {
+            player.vida = jogadorPrincipal->pokemons[i].vida;
+            break;
+        }
+    }
 
     while (combateAtivo) {
         BeginDrawing();
@@ -487,12 +503,12 @@ void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent, Texturas_t textu
         DrawRectangle(barraVidaX, barraVidaY, larguraBarraHP, alturaBarraHP, LIGHTGRAY);
         DrawRectangle(barraVidaX, barraVidaY, (int)(larguraBarraHP * (float)player.vida / player.vidaMaxima), alturaBarraHP, RED);
 
-        // Desenha a imagem do Pokémon do jogador (à esquerda) em um tamanho maior (200x200)
+        // Desenha a imagem do Pokémon do jogador (à esquerda)
         DrawTexturePro(texturaPlayer, (Rectangle){0, 0, texturaPlayer.width, texturaPlayer.height},
                        (Rectangle){larguraMonitor / 4 - 100, alturaMonitor / 2, 200, 200},
                        (Vector2){0, 0}, 0.0f, WHITE);
 
-        // Desenha a imagem do Pokémon oponente (à direita) em um tamanho maior (200x200)
+        // Desenha a imagem do Pokémon oponente (à direita) 
         DrawTexturePro(texturaOpponent, (Rectangle){0, 0, texturaOpponent.width, texturaOpponent.height},
                        (Rectangle){(larguraMonitor * 3 / 4) - 100, alturaMonitor / 4, 200, 200},
                        (Vector2){0, 0}, 0.0f, WHITE);
