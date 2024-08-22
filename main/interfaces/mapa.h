@@ -3,7 +3,7 @@
 
 #include "../config/config.h"
 
-void carregar_mapa();
+void carregar_mapa(Jogador_t *jogadorPrincipal);
 void desenhador_mapa();
 
 #endif // MAP_H

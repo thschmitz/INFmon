@@ -8,16 +8,19 @@ typedef struct Interface {
     Rectangle runBox;
 } Interface;
 
-void rodar_jogo(Camera2D *camera, Texturas_t *textura, int *selvagem, Jogador_t *jogadorPrincipal){
+void rodar_jogo(Camera2D *camera, Texturas_t *textura, int *selvagem, Jogador_t *jogadorPrincipal) {
+
     leitura_movimentos(selvagem, jogadorPrincipal);
     if (IsKeyPressed(KEY_TAB)) {
         menu_opcoes_rodando = true;
         menu_inicial_rodando = false;
         menu_erro_rodando = false;
     }
-    
+
     camera->target.x = jogadorPrincipal->posicaoX;
-    camera->target.y= jogadorPrincipal->posicaoY;
+    camera->target.y = jogadorPrincipal->posicaoY;
+
+    // Ajuste de limites de câmera (opcional, dependendo da necessidade do jogo)
     if (jogadorPrincipal->posicaoY < 110) camera->target.y = 110;
     else if (jogadorPrincipal->posicaoY > 610) camera->target.y = 610;
     if (jogadorPrincipal->posicaoX < 193) camera->target.x = 193;
@@ -28,7 +31,9 @@ void rodar_jogo(Camera2D *camera, Texturas_t *textura, int *selvagem, Jogador_t 
 
     desenhador_mapa();
 
+    // Desenha o jogador na posição correta
     DrawTexture(textura->personagemPrincipal, jogadorPrincipal->posicaoX, jogadorPrincipal->posicaoY, WHITE);
+    
     EndMode2D();
     EndDrawing();
 }

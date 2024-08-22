@@ -7,8 +7,6 @@ int main() {
     larguraMonitor = GetMonitorWidth(GetCurrentMonitor());
     alturaMonitor = GetMonitorHeight(GetCurrentMonitor());
     Jogador_t jogadorPrincipal;
-    jogadorPrincipal.posicaoX = COLUNAS_MAPA * LADO / 2;
-    jogadorPrincipal.posicaoY = LINHAS_MAPA * LADO / 2;
 
     Ataque_t ataque1 = {"TESTE1", 50.5, 42, "NORMAL"};
     Ataque_t ataque2 = {"TESTE2", 12.5, 42, "NORMAL"};
@@ -110,18 +108,18 @@ int main() {
     SetTargetFPS(60);
     SetExitKey(KEY_BACKSPACE);
 
-    Vector2 position = { jogadorPrincipal.posicaoX, jogadorPrincipal.posicaoY };
-    Camera2D camera = { 0 };
-    camera.target = position;
-    camera.offset = (Vector2){ larguraMonitor / 2.0f, alturaMonitor / 2.0f };
-    camera.rotation = 0.0f;
-    camera.zoom = 5.0f;
-
     bool fullscreen = false;
     SetWindowSize(larguraMonitor, alturaMonitor);
     ToggleFullscreen();
 
-    carregar_mapa();
+    carregar_mapa(&jogadorPrincipal);
+
+    Camera2D camera = { 0 };
+    camera.target.x = jogadorPrincipal.posicaoX;
+    camera.target.y = jogadorPrincipal.posicaoY;
+    camera.offset = (Vector2){ larguraMonitor / 2.0f, alturaMonitor / 2.0f };
+    camera.rotation = 0.0f;
+    camera.zoom = 5.0f;
 
     while (!WindowShouldClose() && programa_rodando) {
         if (menu_inicial_rodando) {
@@ -139,6 +137,8 @@ int main() {
 
         } else {
             rodar_jogo(&camera, &texturas, &selvagem, &jogadorPrincipal);
+            printf("NA HORA DE PRINTAR 2: %d, %d", jogadorPrincipal.posicaoX, jogadorPrincipal.posicaoY);
+
         }
     }
 

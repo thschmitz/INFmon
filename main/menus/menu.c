@@ -149,7 +149,6 @@ void menu_inicial(Jogador_t *jogadorPrincipal) {
     switch (selection) {
       case 0:
         // Novo Jogo
-        novo_jogo(jogadorPrincipal);
         menu_inicial_rodando = false;
         menuOpen = false;
         break;
@@ -210,11 +209,6 @@ int carregar_jogo(Jogador_t *jogadorPrincipal){
   fclose(arq);
 
   return retorno;
-}
-
-void novo_jogo(Jogador_t *jogadorPrincipal) {
-  jogadorPrincipal->posicaoX = COLUNAS_MAPA * LADO / 2 - LADO;
-	jogadorPrincipal->posicaoY = LINHAS_MAPA * LADO / 2 - LADO;
 }
 
 void menu_erro() {

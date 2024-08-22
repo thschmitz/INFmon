@@ -207,6 +207,7 @@ void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fug
                 if (tentar_fuga()) {
                     *fugaBemSucedida = true;
                     *combateAtivo = false;
+                    
                     menu_inicial_rodando = false;
                     menu_opcoes_rodando = false;
                     menu_batalha_rodando = false;

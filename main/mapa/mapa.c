@@ -1,6 +1,8 @@
 #include "../config/config.h"
 
-void carregar_mapa() {
+#include "../config/config.h"
+
+void carregar_mapa(Jogador_t *jogadorPrincipal) {
     mapa.fase_atual = 1;
     char nome_mapa[20] = "\0";
 
@@ -18,18 +20,25 @@ void carregar_mapa() {
             char ch = fgetc(file);
             if (ch == EOF) {
                 break;
-            }else{
+            } else {
                 mapa.tiles[y][x] = ch;
+
+                // Se encontrar 'J', define a posição inicial do jogador
+                if (ch == 'J') {
+                    jogadorPrincipal->posicaoX = x * LADO;
+                    jogadorPrincipal->posicaoY = y * LADO;
+                    printf("Posição inicial do jogador definida em X: %d, Y: %d\n", jogadorPrincipal->posicaoX, jogadorPrincipal->posicaoY); // Debug
+                }
             }
         }
-        fgetc(file);
+        fgetc(file); // Pular o caractere de nova linha
     }
 
     fclose(file);
 
+    // Carrega as texturas do mapa
     mapa.texturas.wallTexture = LoadTexture("texturas/wall.png");
     mapa.texturas.groundTexture = LoadTexture("texturas/ground.png");
-    mapa.texturas.playerTexture = LoadTexture("texturas/player.png");
     mapa.texturas.grassTexture = LoadTexture("texturas/grass.png");
 }
 
@@ -44,12 +53,16 @@ void desenhador_mapa() {
                     DrawTexture(mapa.texturas.groundTexture, x * mapa.texturas.groundTexture.width, y * mapa.texturas.groundTexture.height, WHITE);
                     break;
                 case 'J':
-                    DrawTexture(mapa.texturas.playerTexture, x * mapa.texturas.playerTexture.width, y * mapa.texturas.playerTexture.height, WHITE);
+                    // Aqui só desenhamos o chão, o jogador é desenhado separadamente
+                    DrawTexture(mapa.texturas.groundTexture, x * mapa.texturas.groundTexture.width, y * mapa.texturas.groundTexture.height, WHITE);
                     break;
                 case 'P':
                     DrawTexture(mapa.texturas.wallTexture, x * mapa.texturas.wallTexture.width, y * mapa.texturas.wallTexture.height, WHITE);
                     break;
                 case 'G':
+                    DrawTexture(mapa.texturas.grassTexture, x * mapa.texturas.grassTexture.width, y * mapa.texturas.grassTexture.height, WHITE);
+                    break;
+                case 'E':
                     DrawTexture(mapa.texturas.grassTexture, x * mapa.texturas.grassTexture.width, y * mapa.texturas.grassTexture.height, WHITE);
                     break;
                 default:
