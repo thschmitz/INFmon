@@ -20,4 +20,6 @@ int jogador_tem_pokemons_vivos(Jogador_t *jogadorPrincipal);
 void atualizar_lista_pokemons(Jogador_t *jogadorPrincipal);
 int tentar_fuga();
 
+Jogador_t configurar_oponente(Jogador_t jogador, Jogador_t jogadorPrincipal);
+
 #endif

@@ -13,6 +13,7 @@ typedef struct texturas {
     Texture2D groundTexture;
     Texture2D playerTexture;
     Texture2D grassTexture;
+    Texture2D enemyTexture;
     Texture2D personagemPrincipal;
     Texture2D churrasquinhoFrente;
     Texture2D churrasquinhoCostas;

@@ -7,28 +7,23 @@ void leitura_movimentos(int *selvagem, Jogador_t *jogadorPrincipal) //movimentaï
 	float speed = 8.0f;
 	float deltaTime = GetFrameTime();
 
-	if (IsKeyDown(KEY_RIGHT))
-	{
+	if (IsKeyDown(KEY_RIGHT)){
 		dx = LADO * speed * deltaTime;
 	}
 
-	if (IsKeyDown(KEY_LEFT))
-	{
+	if (IsKeyDown(KEY_LEFT)){
 		dx = -LADO * speed * deltaTime;
 	}
 
-	if (IsKeyDown(KEY_UP))
-	{
+	if (IsKeyDown(KEY_UP)){
 		dy = -LADO * speed * deltaTime;
 	}
 
-	if (IsKeyDown(KEY_DOWN))
-	{
+	if (IsKeyDown(KEY_DOWN)){
 		dy = LADO * speed * deltaTime;
 	}
 
-	if (deve_mover(dx, dy, selvagem, jogadorPrincipal) == 1)
-	{
+	if (deve_mover(dx, dy, selvagem, jogadorPrincipal) == 1){
 		move(dx, dy, jogadorPrincipal);
 	}
 }
@@ -48,21 +43,49 @@ int deve_mover(int dx, int dy, int *selvagem, Jogador_t *jogadorPrincipal) //def
 			my = (int)((jogadorPrincipal->posicaoY + 9) / LADO);
 			if (mapa.tiles[my][mx + 1] == 'W') mover = 0;
 			else if(mapa.tiles[my][mx + 1] == 'P') mover = 0;
+			else if(mapa.tiles[my][mx + 1] == 'E') {
+				menu_inicial_rodando = false;
+        		menu_erro_rodando = false;
+        		menu_opcoes_rodando = false;
+				menu_batalha_rodando = true;
+				selvagem = 0;
+			}
 		} else if (dx < 0) {
 			mx = (int)((jogadorPrincipal->posicaoX + 19) / LADO);
 			my = (int)((jogadorPrincipal->posicaoY + 9) / LADO);
 			if (mapa.tiles[my][mx - 1] == 'W')mover = 0;
 			else if(mapa.tiles[my][mx - 1] == 'P') mover = 0;
+			else if(mapa.tiles[my][mx - 1] == 'E') {
+				menu_inicial_rodando = false;
+        		menu_erro_rodando = false;
+        		menu_opcoes_rodando = false;
+				menu_batalha_rodando = true;
+				selvagem = 0;
+			}
 		}
 		if (dy > 0){
 			mx = (int)((jogadorPrincipal->posicaoX + 9) / LADO);
 			my = (int)(jogadorPrincipal->posicaoY / LADO);
 			if (mapa.tiles[my + 1][mx] == 'W')mover = 0;
+			else if(mapa.tiles[my + 1][mx] == 'E') {
+				menu_inicial_rodando = false;
+        		menu_erro_rodando = false;
+        		menu_opcoes_rodando = false;
+				menu_batalha_rodando = true;
+				selvagem = 0;
+			}
 		}else if (dy < 0){
 			mx = (int)((jogadorPrincipal->posicaoX + 9) / LADO);
 			my = (int)((jogadorPrincipal->posicaoY + 19) / LADO);
 			if (mapa.tiles[my - 1][mx] == 'W') mover = 0;
 			else if(mapa.tiles[my - 1][mx] == 'P') mover = 0;
+			else if(mapa.tiles[my - 1][mx] == 'E') {
+				menu_inicial_rodando = false;
+        		menu_erro_rodando = false;
+        		menu_opcoes_rodando = false;
+				menu_batalha_rodando = true;
+				selvagem = 0;
+			}
 		}
 	}
 
