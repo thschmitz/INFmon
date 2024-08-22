@@ -17,6 +17,20 @@ int tentar_fuga() {
     return saiu;
 }
 
+Jogador_t configurar_oponente(Jogador_t jogador, Jogador_t jogadorPrincipal){
+    Jogador_t oponent;
+    int r;
+    int i;
+
+    for(i = 0, i<2, i++){
+	    r = (rand() %6);
+        oponent.pokemons[i] = jogador.pokemons[r];
+        oponent.pokemons[i].xp = jogadorPrincipal.pokemon[0].xp + 100*((rand()%7)-3);
+    }
+
+    return oponent;
+}
+
 Texture2D selecionar_textura(Pokemon_t pokemon, Texturas_t texturas, bool costas) {
     if (strcmp(pokemon.nome, "CHURRASQUINHO") == 0) {
         return costas ? texturas.churrasquinhoCostas : texturas.churrasquinhoFrente;
@@ -354,6 +368,8 @@ void desenhar_opcoes_ataque(InterfaceCombate_t *ui, int *selection, int *menuAta
             desenhar_interface_dialogo(TextFormat("Voce derrotou %s!", opponent->nome));
 
             // Ganhar XP
+            player->xp += 50*(1-((opponent->xp/100) - (player.xp/100));
+
             // Regenerar a vida de todos os Pokémons do jogador ao iniciar a batalha
             for (int i = 0; i < QUANTIDADE_POKEMONS_POR_JOGADOR; i++) {
                 jogadorPrincipal->pokemons[i].vida = jogadorPrincipal->pokemons[i].vidaMaxima;
@@ -527,13 +543,13 @@ void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent, Texturas_t textu
 
         // Exibe informações sobre o inimigo
         DrawText(opponent.nome, margemLateral, margemSuperior, 20, DARKGREEN);
-        DrawText(TextFormat("Lv %d", opponent.xp), margemLateral + 200, margemSuperior, 20, DARKGREEN);
+        DrawText(TextFormat("Lv %d", (int)(opponent.xp/100)), margemLateral + 200, margemSuperior, 20, DARKGREEN);
         DrawRectangle(margemLateral, margemSuperior + 30, larguraBarraHP, alturaBarraHP, LIGHTGRAY);
         DrawRectangle(margemLateral, margemSuperior + 30, (int)(larguraBarraHP * (float)opponent.vida / opponent.vidaMaxima), alturaBarraHP, RED);
 
         // Desenhando a barra de vida do jogador acima das opções
         DrawText(player.nome, barraVidaX, barraVidaY - 20, 20, DARKGREEN);
-        DrawText(TextFormat("Lv %d", player.xp), barraVidaX + larguraBarraHP - 100, barraVidaY - 20, 20, DARKGREEN);
+        DrawText(TextFormat("Lv %d", (int)(player.xp/qoo)), barraVidaX + larguraBarraHP - 100, barraVidaY - 20, 20, DARKGREEN);
         DrawRectangle(barraVidaX, barraVidaY, larguraBarraHP, alturaBarraHP, LIGHTGRAY);
         DrawRectangle(barraVidaX, barraVidaY, (int)(larguraBarraHP * (float)player.vida / player.vidaMaxima), alturaBarraHP, RED);
 

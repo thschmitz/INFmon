@@ -40,6 +40,7 @@ void carregar_mapa(Jogador_t *jogadorPrincipal) {
     mapa.texturas.wallTexture = LoadTexture("texturas/wall.png");
     mapa.texturas.groundTexture = LoadTexture("texturas/ground.png");
     mapa.texturas.grassTexture = LoadTexture("texturas/grass.png");
+    mapa.texturas.enemyTexture = LoadTexture("texturas/inimigo_infmon.png");
 }
 
 void desenhador_mapa() {
@@ -63,7 +64,7 @@ void desenhador_mapa() {
                     DrawTexture(mapa.texturas.grassTexture, x * mapa.texturas.grassTexture.width, y * mapa.texturas.grassTexture.height, WHITE);
                     break;
                 case 'E':
-                    DrawTexture(mapa.texturas.grassTexture, x * mapa.texturas.grassTexture.width, y * mapa.texturas.grassTexture.height, WHITE);
+                    DrawTexture(mapa.texturas.enemyTexture, x * mapa.texturas.enemyTexture.width, y * mapa.texturas.enemyTexture.height, WHITE);
                     break;
                 default:
                     break;
