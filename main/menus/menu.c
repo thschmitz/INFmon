@@ -332,6 +332,7 @@ void menu_escolha_pokemon(Jogador_t *jogadorPrincipal, Pokemon_t pokemonsIniciai
                 jogadorPrincipal->pokemons[0] = (Pokemon_t)pokemonsIniciais[2];
             }
 
+            jogadorPrincipal->pokemons[0].xp = 500;
             jogadorPrincipal->qtdPokemons = 1;
 
             menuOpen = false;  // Sai do loop após a escolha

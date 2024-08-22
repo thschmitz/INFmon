@@ -85,7 +85,7 @@ void selecionar_ataques_aleatorios(Pokemon_t *pokemon, Ataque_t ataquesSeleciona
     }
 }
 
-void desenha_pokemons_jogador(Pokemon_t *player, Texturas_t *texturas, Texture2D *texturaPlayer, Jogador_t *jogadorPrincipal, Pokemon_t *opponent, int *combateAtivo, int *pokemonSelecionado) {
+void desenha_pokemons_jogador(Pokemon_t *player, Texturas_t *texturas, Texture2D *texturaPlayer, Jogador_t *jogadorPrincipal, Pokemon_t *opponent, int *combateAtivo, int *pokemonSelecionado, int *menuPokemonsDisponiveis) {
     int selection = 0;
     bool menuOpen = true;
     int espacamentoVertical = 120; // Espaçamento maior entre as opções
@@ -176,6 +176,7 @@ void desenha_pokemons_jogador(Pokemon_t *player, Texturas_t *texturas, Texture2D
             if (selection == jogadorPrincipal->qtdPokemons) {
                 // Voltar ao menu de combate
                 menuOpen = false;
+                *menuPokemonsDisponiveis = false;
             } else if (jogadorPrincipal->pokemons[selection].vida > 0) {
                 // Seleciona o Pokémon somente se ele tiver vida
                 *pokemonSelecionado = true;
@@ -205,7 +206,6 @@ int tentar_capturar(Pokemon_t *opponent){
 
 void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fugaBemSucedida, int *selection, int *menuAtaque, int *menuPokemonsDisponiveis, Pokemon_t *opponent, Jogador_t *jogadorPrincipal, Pokemon_t *player, Texture2D *texturaPlayer, Texturas_t texturas) {
     Rectangle boxes[] = {ui->fightBox, ui->bagBox, ui->pokemonBox, ui->runBox};
-    int temEspacoNaMochila = 0;
 
     for (int i = 0; i < NUMERO_ATAQUES; i++) {
         Color cor = (i == *selection) ? RED : DARKGRAY;
@@ -227,7 +227,7 @@ void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fug
                 break;
             case 1:
                 // Implementar ação do botão "CAPTURE"
-                if(temEspacoNaMochila == 0){
+                if(jogadorPrincipal->qtdPokemons >= QUANTIDADE_POKEMONS_POR_JOGADOR){
                     desenhar_interface_dialogo("Sua mochila esta cheia de pokemons!");
                 } else {
                     *combateAtivo = false;
@@ -237,7 +237,6 @@ void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fug
                         for(int i =0; i < jogadorPrincipal->qtdPokemons;i++){
                             if(strlen(jogadorPrincipal->pokemons[i].nome) == 0){
                                 jogadorPrincipal->pokemons[i] = *opponent;
-                                temEspacoNaMochila = 1;
                                 break;
                             }
                         }
@@ -313,6 +312,7 @@ int jogador_tem_pokemons_vivos(Jogador_t *jogadorPrincipal) {
 
 void ataqueOponente(Pokemon_t *opponent, Pokemon_t *player, Ataque_t ataqueOponente, Texturas_t texturas, Texture2D *texturaPlayer, int *combateAtivo, Jogador_t *jogadorPrincipal) {
     int i = 0;
+    int menuPokemons = false;
 
     // Atualiza a vida do Pokémon atual no jogadorPrincipal
     for (i = 0; i < jogadorPrincipal->qtdPokemons; i++) {
@@ -336,7 +336,7 @@ void ataqueOponente(Pokemon_t *opponent, Pokemon_t *player, Ataque_t ataqueOpone
 
         if (jogador_tem_pokemons_vivos(jogadorPrincipal)) {
             int pokemonSelecionado = 0;
-            desenha_pokemons_jogador(player, &texturas, texturaPlayer, jogadorPrincipal, opponent, combateAtivo, &pokemonSelecionado);
+            desenha_pokemons_jogador(player, &texturas, texturaPlayer, jogadorPrincipal, opponent, combateAtivo, &pokemonSelecionado, &menuPokemons);
 
             if(pokemonSelecionado){
                 // O ataque do oponente não deve ser repetido aqui
@@ -463,6 +463,7 @@ void ataqueOponente_inimigo(Pokemon_t *opponent, Pokemon_t *player, Ataque_t ata
     EndDrawing();
     WaitTime(2);
     int pokemonSelecionado = false;
+    int menuPokemons = false;
 
     if (player->vida <= 0) {
         player->vida = 0;
@@ -473,7 +474,7 @@ void ataqueOponente_inimigo(Pokemon_t *opponent, Pokemon_t *player, Ataque_t ata
         atualizar_lista_pokemons(jogadorPrincipal);  // Atualiza a vida dos Pokémons
 
         if (jogador_tem_pokemons_vivos(jogadorPrincipal)) {
-            desenha_pokemons_jogador(player, &texturas, texturaPlayer, jogadorPrincipal, opponent, combateAtivo, &pokemonSelecionado);
+            desenha_pokemons_jogador(player, &texturas, texturaPlayer, jogadorPrincipal, opponent, combateAtivo, &pokemonSelecionado, &menuPokemons);
         } else {
             desenhar_interface_dialogo("Todos os seus Pokémons foram derrotados!");
             EndDrawing();
@@ -578,7 +579,7 @@ void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent, Texturas_t textu
             desenhar_opcoes_ataque(&ui, &selection, &menuAtaque, &player, ataquesSelecionados, &opponent, texturas, &texturaPlayer, &combateAtivo, jogadorPrincipal);
         } else if (menuPokemonsDisponiveis) {
             atualizar_lista_pokemons(jogadorPrincipal);  // Atualiza a vida dos Pokémons antes de abrir a tela de seleção
-            desenha_pokemons_jogador(&player, &texturas, &texturaPlayer, jogadorPrincipal, &opponent, &combateAtivo, &pokemonSelecionado);
+            desenha_pokemons_jogador(&player, &texturas, &texturaPlayer, jogadorPrincipal, &opponent, &combateAtivo, &pokemonSelecionado, &menuPokemonsDisponiveis);
 
             // Após a escolha do Pokémon, o ataque do oponente ocorre, mas apenas se um Pokémon foi selecionado
             if (pokemonSelecionado) {
@@ -678,7 +679,7 @@ void mostrar_tela_combate_inimigo(Pokemon_t player, Jogador_t opponent, Texturas
             desenhar_opcoes_ataque_inimigo(&ui, &selection, &menuAtaque, &player, ataquesSelecionados, &opponent.pokemons[0], texturas, &texturaPlayer, &combateAtivo, &opponent, jogadorPrincipal);
         } else if (menuPokemonsDisponiveis) {
             atualizar_lista_pokemons(jogadorPrincipal);  // Atualiza a vida dos Pokémons antes de abrir a tela de seleção
-            desenha_pokemons_jogador(&player, &texturas, &texturaPlayer, jogadorPrincipal, &opponent.pokemons[0], &combateAtivo, &pokemonSelecionado);
+            desenha_pokemons_jogador(&player, &texturas, &texturaPlayer, jogadorPrincipal, &opponent.pokemons[0], &combateAtivo, &pokemonSelecionado, &menuPokemonsDisponiveis);
 
             // Após a escolha do Pokémon, o ataque do oponente ocorre, mas apenas se um Pokémon foi selecionado
             if (pokemonSelecionado) {
