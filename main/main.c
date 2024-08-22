@@ -35,7 +35,7 @@ int main() {
 	Ataque_t ataque24 = {"BATMOVEL", 90, 8, "VOADOR"};
 	//Ataque_t ataques[] = {ataque1, ataque2, ataque3, ataque4, ataque5, ataque6};
 
-	Pokemon_t charmander = {
+	Pokemon_t churrasquinho = {
 		.ataques = {ataque5, ataque6, ataque7, ataque8},
 		.defesa = 43,
 		.vida = 195,
@@ -101,14 +101,14 @@ int main() {
 		.tipoPokemon = "ELETRICO"
 	};
 
+    Pokemon_t pokemonsIniciais[3] = {graminha, churrasquinho, chorao};
+
 	jogador.pokemons[0] = graminha;
-	jogador.pokemons[1] = charmander;
+	jogador.pokemons[1] = churrasquinho;
 	jogador.pokemons[2] = chorao;
 	jogador.pokemons[3] = diglett;
 	jogador.pokemons[4] = pikachu;
 	jogador.pokemons[5] = zubat;
-
-    jogadorPrincipal.pokemons[0] = graminha;
 
     Texturas_t texturas;
     texturas.personagemPrincipal = LoadTexture("texturas/personagem_infmon.png"); // personagem principal
@@ -164,8 +164,7 @@ int main() {
             }
 
         } else {
-            rodar_jogo(&camera, &texturas, &selvagem, &jogadorPrincipal);
-
+            rodar_jogo(&camera, &texturas, &selvagem, &jogadorPrincipal, pokemonsIniciais);
         }
     }
 

@@ -3,6 +3,6 @@
 
 #include "../config/config.h"
 
-void rodar_jogo(Camera2D *camera, Texturas_t *textura, int *selvagem, Jogador_t *jogadorPrincipal);
+void rodar_jogo(Camera2D *camera, Texturas_t *textura, int *selvagem, Jogador_t *jogadorPrincipal, Pokemon_t pokemonsIniciais[]);
 
 #endif

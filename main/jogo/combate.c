@@ -107,12 +107,12 @@ void desenha_pokemons_jogador(Pokemon_t *player, Texturas_t *texturas, Texture2D
         }
 
         // Exibe a lista de Pokémons do jogador
-        for (int i = 0; i <= QUANTIDADE_POKEMONS_POR_JOGADOR; i++) {
+        for (int i = 0; i <= jogadorPrincipal->qtdPokemons; i++) {
             Color cor = (i == selection) ? RED : BLACK;
             int posYTexto = alturaMonitor / 4 + i * espacamentoVertical;
             int posXTexto = 0;
 
-            if (i < QUANTIDADE_POKEMONS_POR_JOGADOR && strlen(jogadorPrincipal->pokemons[i].nome) > 0) {
+            if (i < jogadorPrincipal->qtdPokemons && strlen(jogadorPrincipal->pokemons[i].nome) > 0) {
                 // Se o Pokémon está derrotado, desabilita a seleção
                 if (jogadorPrincipal->pokemons[i].vida <= 0) {
                     cor = GRAY; // Muda a cor do texto para indicar que está desabilitado
@@ -146,7 +146,7 @@ void desenha_pokemons_jogador(Pokemon_t *player, Texturas_t *texturas, Texture2D
                 DrawTexturePro(imagemPokemon, (Rectangle){0, 0, imagemPokemon.width, imagemPokemon.height},
                                (Rectangle){posXImagem, posYImagem, larguraImagem, alturaImagem},
                                (Vector2){0, 0}, 0.0f, WHITE);
-            } else if (i == QUANTIDADE_POKEMONS_POR_JOGADOR) {
+            } else if (i == jogadorPrincipal->qtdPokemons) {
                 // Desenha a opção "Voltar" no final da lista
                 int larguraTexto = MeasureText("Voltar", TAMANHO_FONTE_OPCOES_MENU);
                 posXTexto = (larguraMonitor / 2) - (larguraTexto / 2);
@@ -165,15 +165,15 @@ void desenha_pokemons_jogador(Pokemon_t *player, Texturas_t *texturas, Texture2D
 
         if (IsKeyPressed(KEY_DOWN)) {
             selection++;
-            if (selection > QUANTIDADE_POKEMONS_POR_JOGADOR) selection = 0;
+            if (selection > jogadorPrincipal->qtdPokemons) selection = 0;
         }
         if (IsKeyPressed(KEY_UP)) {
             selection--;
-            if (selection < 0) selection = QUANTIDADE_POKEMONS_POR_JOGADOR;
+            if (selection < 0) selection = jogadorPrincipal->qtdPokemons;
         }
 
         if (IsKeyPressed(KEY_ENTER)) {
-            if (selection == QUANTIDADE_POKEMONS_POR_JOGADOR) {
+            if (selection == jogadorPrincipal->qtdPokemons) {
                 // Voltar ao menu de combate
                 menuOpen = false;
             } else if (jogadorPrincipal->pokemons[selection].vida > 0) {
@@ -232,8 +232,9 @@ void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fug
                 } else {
                     *combateAtivo = false;
                     if(tentar_capturar(opponent)) {    
+                        jogadorPrincipal->qtdPokemons+=1;
                         desenhar_interface_dialogo("Pokemon capturado com sucesso!");
-                        for(int i =0; i < QUANTIDADE_POKEMONS_POR_JOGADOR;i++){
+                        for(int i =0; i < jogadorPrincipal->qtdPokemons;i++){
                             if(strlen(jogadorPrincipal->pokemons[i].nome) == 0){
                                 jogadorPrincipal->pokemons[i] = *opponent;
                                 temEspacoNaMochila = 1;
@@ -294,7 +295,7 @@ void escolher_novo_pokemon_inimigo(Pokemon_t *opponent, Pokemon_t timeInimigo[],
 }
 
 void atualizar_lista_pokemons(Jogador_t *jogadorPrincipal) {
-    for (int i = 0; i < QUANTIDADE_POKEMONS_POR_JOGADOR; i++) {
+    for (int i = 0; i < jogadorPrincipal->qtdPokemons; i++) {
         if (jogadorPrincipal->pokemons[i].vida <= 0) {
             jogadorPrincipal->pokemons[i].vida = 0;  // Certifica que a vida está em 0
         }
@@ -302,7 +303,7 @@ void atualizar_lista_pokemons(Jogador_t *jogadorPrincipal) {
 }
 
 int jogador_tem_pokemons_vivos(Jogador_t *jogadorPrincipal) {
-    for (int i = 0; i < QUANTIDADE_POKEMONS_POR_JOGADOR; i++) {
+    for (int i = 0; i < jogadorPrincipal->qtdPokemons; i++) {
         if (jogadorPrincipal->pokemons[i].vida > 0) {
             return true;
         }
@@ -314,7 +315,7 @@ void ataqueOponente(Pokemon_t *opponent, Pokemon_t *player, Ataque_t ataqueOpone
     int i = 0;
 
     // Atualiza a vida do Pokémon atual no jogadorPrincipal
-    for (i = 0; i < QUANTIDADE_POKEMONS_POR_JOGADOR; i++) {
+    for (i = 0; i < jogadorPrincipal->qtdPokemons; i++) {
         if (strcmp(player->nome, jogadorPrincipal->pokemons[i].nome) == 0) {
             jogadorPrincipal->pokemons[i].vida -= ataqueOponente.dano * (1 - (player->defesa - opponent->ataque) / 100);
             player->vida = jogadorPrincipal->pokemons[i].vida; // Atualiza a vida do player também
@@ -379,12 +380,12 @@ void desenhar_opcoes_ataque(InterfaceCombate_t *ui, int *selection, int *menuAta
             player->xp += 50*(1-((opponent->xp/100) - (player->xp/100)));
 
             // Regenerar a vida de todos os Pokémons do jogador ao iniciar a batalha
-            for (int i = 0; i < QUANTIDADE_POKEMONS_POR_JOGADOR; i++) {
+            for (int i = 0; i < jogadorPrincipal->qtdPokemons; i++) {
                 jogadorPrincipal->pokemons[i].vida = jogadorPrincipal->pokemons[i].vidaMaxima;
             }
 
             // Atualiza o Pokémon principal (player) para refletir a vida regenerada
-            for (int i = 0; i < QUANTIDADE_POKEMONS_POR_JOGADOR; i++) {
+            for (int i = 0; i < jogadorPrincipal->qtdPokemons; i++) {
                 if (strcmp(player->nome, jogadorPrincipal->pokemons[i].nome) == 0) {
                     player->vida = jogadorPrincipal->pokemons[i].vidaMaxima;
                     break;
@@ -473,9 +474,6 @@ void ataqueOponente_inimigo(Pokemon_t *opponent, Pokemon_t *player, Ataque_t ata
 
         if (jogador_tem_pokemons_vivos(jogadorPrincipal)) {
             desenha_pokemons_jogador(player, &texturas, texturaPlayer, jogadorPrincipal, opponent, combateAtivo, &pokemonSelecionado);
-            if(pokemonSelecionado){
-                // O ataque do oponente não deve ser repetido aqui
-            }
         } else {
             desenhar_interface_dialogo("Todos os seus Pokémons foram derrotados!");
             EndDrawing();
@@ -540,7 +538,7 @@ void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent, Texturas_t textu
     texturaPlayer = selecionar_textura(player, texturas, true);
     texturaOpponent = selecionar_textura(opponent, texturas, false);
     // Atualiza o Pokémon principal (player) para refletir a vida regenerada
-    for (int i = 0; i < QUANTIDADE_POKEMONS_POR_JOGADOR; i++) {
+    for (int i = 0; i < jogadorPrincipal->qtdPokemons; i++) {
         if (strcmp(player.nome, jogadorPrincipal->pokemons[i].nome) == 0) {
             player.vida = jogadorPrincipal->pokemons[i].vida;
             break;

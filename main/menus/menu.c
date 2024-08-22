@@ -19,6 +19,13 @@ static const char *labelBotoesMenuErro[] = {
   "VOLTAR TELA INICIAL ( Salvamento automático )"
 };
 
+typedef struct {
+  char nome[20];
+  char descricao[50];
+  Texture2D texturaFrente;
+  Texture2D texturaCostas;
+} PokemonInicial_t;
+
 // Corrigindo a função measure_text para aceitar const char *
 int measure_text(const char *text, int tamanhoFonte) {
   return MeasureText(text, tamanhoFonte);
@@ -270,4 +277,70 @@ void menu_erro() {
         break;
     }
   }
+}
+
+// Graminha, churrasquinho e chorao
+void menu_escolha_pokemon(Jogador_t *jogadorPrincipal, Pokemon_t pokemonsIniciais[3]) {
+    typedef struct {
+        const char *nome;
+        const char *descricao;
+        Texture2D texturaFrente;
+        Texture2D texturaCostas;
+    } PokemonInicial_t;
+
+    PokemonInicial_t pokemonsIniciaisLista[3] = {
+        {pokemonsIniciais[0].nome, "Pokémon de Grama", LoadTexture("texturas/graminha_frente.png"), LoadTexture("texturas/graminha_costas.png")},
+        {pokemonsIniciais[1].nome, "Pokémon de Fogo", LoadTexture("texturas/churrasquinho_invertido.png"), LoadTexture("texturas/churrasquinho_costas.png")},
+        {pokemonsIniciais[2].nome, "Pokémon de Água", LoadTexture("texturas/chorao2def.png"), LoadTexture("texturas/chorao2_costas.png")}
+    };
+
+    int selection = 0;
+    bool menuOpen = true;
+
+    while (menuOpen) {
+        BeginDrawing();
+        ClearBackground(RAYWHITE);
+
+        for (int i = 0; i < 3; i++) {
+            Color cor = (i == selection) ? RED : BLACK;
+            int posX = larguraMonitor / 4 * (i + 1) - 100;
+            int posY = alturaMonitor / 2 - 100;
+
+            // Desenha a imagem do Pokémon
+            DrawTexturePro(pokemonsIniciaisLista[i].texturaFrente, (Rectangle){0, 0, pokemonsIniciaisLista[i].texturaFrente.width, pokemonsIniciaisLista[i].texturaFrente.height},
+                           (Rectangle){posX, posY, 200, 200},
+                           (Vector2){0, 0}, 0.0f, WHITE);
+
+            // Desenha o nome do Pokémon
+            DrawText(pokemonsIniciais[i].nome, posX, posY + 250, 20, cor);
+        }
+
+        EndDrawing();
+
+        // Navegação no menu
+        if (IsKeyPressed(KEY_RIGHT)) selection = (selection + 1) % 3;
+        if (IsKeyPressed(KEY_LEFT)) selection = (selection - 1 + 3) % 3;
+
+        // Confirmação da escolha
+        if (IsKeyPressed(KEY_ENTER)) {
+            // Atualiza o Pokémon do jogador com base na escolha
+            if (selection == 0) {
+                jogadorPrincipal->pokemons[0] = (Pokemon_t)pokemonsIniciais[0];
+            } else if (selection == 1) {
+                jogadorPrincipal->pokemons[0] = (Pokemon_t)pokemonsIniciais[1];
+            } else if (selection == 2) {
+                jogadorPrincipal->pokemons[0] = (Pokemon_t)pokemonsIniciais[2];
+            }
+
+            jogadorPrincipal->qtdPokemons = 1;
+
+            menuOpen = false;  // Sai do loop após a escolha
+        }
+    }
+
+    // Descarrega as texturas após o uso
+    for (int i = 0; i < 3; i++) {
+        UnloadTexture(pokemonsIniciaisLista[i].texturaFrente);
+        UnloadTexture(pokemonsIniciaisLista[i].texturaCostas);
+    }
 }

@@ -8,8 +8,10 @@ typedef struct Interface {
     Rectangle runBox;
 } Interface;
 
-void rodar_jogo(Camera2D *camera, Texturas_t *textura, int *selvagem, Jogador_t *jogadorPrincipal) {
-
+void rodar_jogo(Camera2D *camera, Texturas_t *textura, int *selvagem, Jogador_t *jogadorPrincipal, Pokemon_t pokemonsIniciais[]) {
+    if(strlen(jogadorPrincipal->pokemons[0].nome) == 0){
+        menu_escolha_pokemon(jogadorPrincipal, pokemonsIniciais);
+    }
     leitura_movimentos(selvagem, jogadorPrincipal);
     if (IsKeyPressed(KEY_TAB)) {
         menu_opcoes_rodando = true;

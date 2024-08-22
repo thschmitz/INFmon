@@ -68,6 +68,7 @@ typedef struct pokemon {
 */
 typedef struct jogador {
     Pokemon_t pokemons[QUANTIDADE_POKEMONS_POR_JOGADOR];
+    int qtdPokemons;
     int posicaoX;
     int posicaoY;
 } Jogador_t;
