@@ -174,8 +174,23 @@ void desenha_pokemons_jogador(Pokemon_t *player, Texturas_t *texturas, Texture2D
     UnloadTexture(texturas->ponteiroMenuInicialTexture);
 }
 
-void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fugaBemSucedida, int *selection, int *menuAtaque, int *menuPokemonsDisponiveis) {
+int tentar_capturar(Pokemon_t *opponent){
+    float vidaAtual = (float)opponent->vida;
+    float vidaMaxima = (float)opponent->vidaMaxima;
+
+    float chanceCaptura = 50.0f * (1-(vidaAtual / vidaMaxima));
+    float randomValue = (float)(rand() % 100);
+
+    if(randomValue < chanceCaptura){
+        return true;
+    } else {
+        return false;
+    }
+}
+
+void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fugaBemSucedida, int *selection, int *menuAtaque, int *menuPokemonsDisponiveis, Pokemon_t *opponent, Jogador_t *jogadorPrincipal) {
     Rectangle boxes[] = {ui->fightBox, ui->bagBox, ui->pokemonBox, ui->runBox};
+    int temEspacoNaMochila = 0;
 
     for (int i = 0; i < NUMERO_ATAQUES; i++) {
         Color cor = (i == *selection) ? RED : DARKGRAY;
@@ -197,7 +212,25 @@ void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fug
                 break;
             case 1:
                 // Implementar ação do botão "CAPTURE"
-                *combateAtivo = false;
+                if(tentar_capturar(opponent)) {
+                    desenhar_interface_dialogo("Pokemon capturado com sucesso!");
+
+                    for(int i =0; i < QUANTIDADE_POKEMONS_POR_JOGADOR;i++){
+                        
+                        if(strlen(jogadorPrincipal->pokemons[i].nome) == 0){
+                            jogadorPrincipal->pokemons[i] = *opponent;
+                            temEspacoNaMochila = 1;
+                            break;
+                        }
+                    }
+                    if(temEspacoNaMochila == 0){
+                        desenhar_interface_dialogo("Sua mochila esta cheia de pokemons!");
+                    } else {
+                        *combateAtivo = false;
+                    }
+                } else {
+                    desenhar_interface_dialogo("Captura falhou!");
+                }
                 break;
             case 2:
                 // Implementar ação do botão "POKEMON"
@@ -521,7 +554,7 @@ void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent, Texturas_t textu
             desenha_pokemons_jogador(&player, &texturas, &texturaPlayer, jogadorPrincipal);
             menuPokemonsDisponiveis = false;
         } else {
-            desenhar_opcoes_combate(&ui, &combateAtivo, &fugaBemSucedida, &selection, &menuAtaque, &menuPokemonsDisponiveis);
+            desenhar_opcoes_combate(&ui, &combateAtivo, &fugaBemSucedida, &selection, &menuAtaque, &menuPokemonsDisponiveis, &opponent, jogadorPrincipal);
         }
 
         EndDrawing();
@@ -613,7 +646,7 @@ void mostrar_tela_combate_inimigo(Pokemon_t player, Jogador_t opponent, Texturas
             desenha_pokemons_jogador(&player, &texturas, &texturaPlayer, jogadorPrincipal);
             menuPokemonsDisponiveis = false;
         } else {
-            desenhar_opcoes_combate(&ui, &combateAtivo, &fugaBemSucedida, &selection, &menuAtaque, &menuPokemonsDisponiveis);
+            desenhar_opcoes_combate(&ui, &combateAtivo, &fugaBemSucedida, &selection, &menuAtaque, &menuPokemonsDisponiveis, &opponent.pokemons[0], jogadorPrincipal);
         }
 
         EndDrawing();

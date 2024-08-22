@@ -137,7 +137,6 @@ int main() {
 
         } else {
             rodar_jogo(&camera, &texturas, &selvagem, &jogadorPrincipal);
-            printf("NA HORA DE PRINTAR 2: %d, %d", jogadorPrincipal.posicaoX, jogadorPrincipal.posicaoY);
 
         }
     }
