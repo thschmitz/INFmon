@@ -101,7 +101,7 @@ int main() {
 		.tipoPokemon = "ELETRICO"
 	};
 
-    Pokemon_t pokemonsIniciais[3] = {graminha, churrasquinho, chorao};
+	Pokemon_t pokemonsIniciais[3] = {graminha, churrasquinho, chorao};
 
 	jogador.pokemons[0] = graminha;
 	jogador.pokemons[1] = churrasquinho;

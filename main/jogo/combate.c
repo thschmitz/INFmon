@@ -17,10 +17,28 @@ int tentar_fuga() {
     return saiu;
 }
 
+int tipagem_pokemon(Pokemon_t pokemon){
+    int tipo;
+    if(!strcmp(pokemon.tipoPokemon, "GRAMA"))
+        tipo = 0;
+    else if(!strcmp(pokemon.tipoPokemon, "FOGO"))
+        tipo = 1;
+    else if(!strcmp(pokemon.tipoPokemon, "AGUA"))
+        tipo = 2;
+    else if(!strcmp(pokemon.tipoPokemon, "TERRA"))
+        tipo = 3;
+    else if(!strcmp(pokemon.tipoPokemon, "ELETRICO"))
+        tipo = 4;
+    else if(!strcmp(pokemon.tipoPokemon, "VOADOR"))
+        tipo = 5;
+    return tipo;
+}
+
 Jogador_t configurar_oponente(Jogador_t jogador, Jogador_t jogadorPrincipal){
     Jogador_t oponent;
     int r;
     int i;
+    printf("%f", jogadorPrincipal.pokemons[0].xp);
 
     for(i = 0; i<2; i++){
 	    r = (rand() %6);
@@ -366,12 +384,18 @@ void desenhar_opcoes_ataque(InterfaceCombate_t *ui, int *selection, int *menuAta
 
     if (IsKeyPressed(KEY_ENTER)) {
         // Implementar ações específicas ao selecionar um ataque
-        opponent->vida -= ataquesSelecionados[*selection].dano * (1 - (opponent->defesa - player->ataque) / 100);
+        opponent->vida -= ataquesSelecionados[*selection].dano * (1 - (opponent->defesa - player->ataque) / 100) * tabela[tipagem_pokemon(*player)][tipagem_pokemon(*opponent)];
         *menuAtaque = false;
-
+        
         BeginDrawing();
         ClearBackground(RAYWHITE);
         desenhar_interface_dialogo(TextFormat("Voce usou o ataque %s!", ataquesSelecionados[*selection].nome));
+        if(tabela[tipagem_pokemon(*player)][tipagem_pokemon(*opponent)] == 0.5)
+            desenhar_interface_dialogo(TextFormat("Esse ataque é pouco efetivo!"));
+        else if(tabela[tipagem_pokemon(*player)][tipagem_pokemon(*opponent)] == 0)
+            desenhar_interface_dialogo(TextFormat("O pokemon adversário é imune é esse ataque!"));
+        else if(tabela[tipagem_pokemon(*player)][tipagem_pokemon(*opponent)] == 1.5)
+            desenhar_interface_dialogo(TextFormat("Esse ataque é super efetivo!"));
 
         if (opponent->vida <= 0) {
             desenhar_interface_dialogo(TextFormat("Voce derrotou %s!", opponent->nome));
@@ -493,6 +517,8 @@ void mostrar_tela_combate(Pokemon_t player, Pokemon_t opponent, Texturas_t textu
     int selection = 0;
     int pokemonSelecionado = 0;
 
+    opponent.xp = player.xp + 100*((rand()%7)-3);
+
     InterfaceCombate_t ui = {
         .optionsBox = {0, 0, 0, 0},
         .fightBox = {0, 0, 0, 0},
@@ -602,6 +628,7 @@ void mostrar_tela_combate_inimigo(Pokemon_t player, Jogador_t opponent, Texturas
     int menuAtaque = false;
     int menuPokemonsDisponiveis = false;
     int selection = 0;
+    int inimigo = 0;
     int pokemonSelecionado = false;
 
     InterfaceCombate_t ui = {
@@ -644,7 +671,7 @@ void mostrar_tela_combate_inimigo(Pokemon_t player, Jogador_t opponent, Texturas
 
     // Determina as texturas do jogador e do Pokémon do oponente atual
     Texture2D texturaPlayer = selecionar_textura(player, texturas, true);
-    Texture2D texturaOpponent = selecionar_textura(opponent.pokemons[0], texturas, false); // Assumindo que o primeiro Pokémon do oponente é o atual
+    Texture2D texturaOpponent = selecionar_textura(opponent.pokemons[inimigo], texturas, false); // Assumindo que o primeiro Pokémon do oponente é o atual
 
     while (combateAtivo) {
         BeginDrawing();
@@ -654,7 +681,7 @@ void mostrar_tela_combate_inimigo(Pokemon_t player, Jogador_t opponent, Texturas
         int margemLateral = larguraMonitor * 0.1;
 
         // Exibe informações sobre o Pokémon do oponente
-        DrawText(opponent.pokemons[0].nome, margemLateral, margemSuperior, 20, DARKGREEN);
+        DrawText(opponent.pokemons[inimigo].nome, margemLateral, margemSuperior, 20, DARKGREEN);
         DrawText(TextFormat("Lv %d", opponent.pokemons[0].xp), margemLateral + 200, margemSuperior, 20, DARKGREEN);
         DrawRectangle(margemLateral, margemSuperior + 30, larguraBarraHP, alturaBarraHP, LIGHTGRAY);
         DrawRectangle(margemLateral, margemSuperior + 30, (int)(larguraBarraHP * (float)opponent.pokemons[0].vida / opponent.pokemons[0].vidaMaxima), alturaBarraHP, RED);
@@ -694,4 +721,5 @@ void mostrar_tela_combate_inimigo(Pokemon_t player, Jogador_t opponent, Texturas
 
         EndDrawing();
     }
+    mapa.fase_atual += 1;
 }
