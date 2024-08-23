@@ -1,7 +1,5 @@
 #include "../config/config.h"
 
-#include "../config/config.h"
-
 void carregar_mapa(Jogador_t *jogadorPrincipal) {
     mapa.fase_atual = 1;
     char nome_mapa[20] = "\0";
@@ -64,6 +62,7 @@ void desenhador_mapa() {
                     DrawTexture(mapa.texturas.grassTexture, x * mapa.texturas.grassTexture.width, y * mapa.texturas.grassTexture.height, WHITE);
                     break;
                 case 'E':
+                    DrawTexture(mapa.texturas.groundTexture, x * mapa.texturas.groundTexture.width, y * mapa.texturas.groundTexture.height, WHITE);
                     DrawTexture(mapa.texturas.enemyTexture, x * mapa.texturas.enemyTexture.width, y * mapa.texturas.enemyTexture.height, WHITE);
                     break;
                 default:

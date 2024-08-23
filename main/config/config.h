@@ -40,6 +40,7 @@ extern int larguraMonitor;
 extern int alturaMonitor;
 extern int posicaoX, posicaoY;
 extern const char tituloProjeto[10];
+extern float tabela[6][6];
 extern Mapa_t mapa;
 
 void InitRandomSeed();

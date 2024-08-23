@@ -67,6 +67,7 @@ int deve_mover(int dx, int dy, int *selvagem, Jogador_t *jogadorPrincipal) //def
 			mx = (int)((jogadorPrincipal->posicaoX + 9) / LADO);
 			my = (int)(jogadorPrincipal->posicaoY / LADO);
 			if (mapa.tiles[my + 1][mx] == 'W')mover = 0;
+			else if(mapa.tiles[my + 1][mx] == 'P') mover = 0;
 			else if(mapa.tiles[my + 1][mx] == 'E') {
 				menu_inicial_rodando = false;
         		menu_erro_rodando = false;

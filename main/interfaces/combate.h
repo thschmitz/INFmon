@@ -19,6 +19,7 @@ void mostrar_tela_combate_inimigo(Pokemon_t player, Jogador_t opponent, Texturas
 int jogador_tem_pokemons_vivos(Jogador_t *jogadorPrincipal);
 void atualizar_lista_pokemons(Jogador_t *jogadorPrincipal);
 int tentar_fuga();
+int tipagem_pokemon(Pokemon_t pokemon);
 
 Jogador_t configurar_oponente(Jogador_t jogador, Jogador_t jogadorPrincipal);
 

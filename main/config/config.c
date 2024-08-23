@@ -22,3 +22,13 @@ void InitRandomSeed() {
     globalSeed = (unsigned int)time(NULL);
     srand(globalSeed);
 }
+
+//Tabela de desvantagens
+float tabela[6][6] = {
+    {1, 0.5, 1, 1.5, 1, 1},
+    {1.5, 1, 0.5, 0.5, 1, 1},
+    {0.5, 1.5, 1, 1.5, 0.5, 1},
+    {1, 1.5, 1, 1, 1.5, 0},
+    {1, 1, 1, 0, 1, 1},
+    {1.5, 1, 1, 1, 1, 1}
+};

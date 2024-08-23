@@ -282,16 +282,16 @@ void menu_erro() {
 // Graminha, churrasquinho e chorao
 void menu_escolha_pokemon(Jogador_t *jogadorPrincipal, Pokemon_t pokemonsIniciais[3]) {
     typedef struct {
-        const char *nome;
-        const char *descricao;
-        Texture2D texturaFrente;
-        Texture2D texturaCostas;
+      const char *nome;
+      const char *descricao;
+      Texture2D texturaFrente;
+      Texture2D texturaCostas;
     } PokemonInicial_t;
 
     PokemonInicial_t pokemonsIniciaisLista[3] = {
-        {pokemonsIniciais[0].nome, "Pokémon de Grama", LoadTexture("texturas/graminha_frente.png"), LoadTexture("texturas/graminha_costas.png")},
-        {pokemonsIniciais[1].nome, "Pokémon de Fogo", LoadTexture("texturas/churrasquinho_invertido.png"), LoadTexture("texturas/churrasquinho_costas.png")},
-        {pokemonsIniciais[2].nome, "Pokémon de Água", LoadTexture("texturas/chorao2def.png"), LoadTexture("texturas/chorao2_costas.png")}
+      {pokemonsIniciais[0].nome, "Pokémon de Grama", LoadTexture("texturas/graminha_frente.png"), LoadTexture("texturas/graminha_costas.png")},
+      {pokemonsIniciais[1].nome, "Pokémon de Fogo", LoadTexture("texturas/churrasquinho_invertido.png"), LoadTexture("texturas/churrasquinho_costas.png")},
+      {pokemonsIniciais[2].nome, "Pokémon de Água", LoadTexture("texturas/chorao2def.png"), LoadTexture("texturas/chorao2_costas.png")}
     };
 
     int selection = 0;
@@ -307,7 +307,7 @@ void menu_escolha_pokemon(Jogador_t *jogadorPrincipal, Pokemon_t pokemonsIniciai
             int posY = alturaMonitor / 2 - 100;
 
             // Desenha a imagem do Pokémon
-            DrawTexturePro(pokemonsIniciaisLista[i].texturaFrente, (Rectangle){0, 0, pokemonsIniciaisLista[i].texturaFrente.width, pokemonsIniciaisLista[i].texturaFrente.height},
+             DrawTexturePro(pokemonsIniciaisLista[i].texturaFrente, (Rectangle){0, 0, pokemonsIniciaisLista[i].texturaFrente.width, pokemonsIniciaisLista[i].texturaFrente.height},
                            (Rectangle){posX, posY, 200, 200},
                            (Vector2){0, 0}, 0.0f, WHITE);
 
@@ -334,6 +334,7 @@ void menu_escolha_pokemon(Jogador_t *jogadorPrincipal, Pokemon_t pokemonsIniciai
 
             jogadorPrincipal->pokemons[0].xp = 500;
             jogadorPrincipal->qtdPokemons = 1;
+            jogadorPrincipal->pokemons[0].xp = 500;
 
             menuOpen = false;  // Sai do loop após a escolha
         }
