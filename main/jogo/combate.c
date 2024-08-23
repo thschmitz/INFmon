@@ -38,7 +38,7 @@ Jogador_t configurar_oponente(Jogador_t jogador, Jogador_t jogadorPrincipal){
     Jogador_t oponent;
     int r;
     int i;
-    printf("%f", jogadorPrincipal.pokemons[0].xp);
+    printf("%d", jogadorPrincipal.pokemons[0].xp);
 
     for(i = 0; i<2; i++){
 	    r = (rand() %6);
