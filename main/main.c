@@ -33,7 +33,6 @@ int main() {
 	Ataque_t ataque22 = {"BOMERANG", 80, 10, "VOADOR"};
 	Ataque_t ataque23 = {"SONAR", 50, 20, "VOADOR"};
 	Ataque_t ataque24 = {"BATMOVEL", 90, 8, "VOADOR"};
-	//Ataque_t ataques[] = {ataque1, ataque2, ataque3, ataque4, ataque5, ataque6};
 
 	Pokemon_t churrasquinho = {
 		.ataques = {ataque5, ataque6, ataque7, ataque8},
@@ -139,7 +138,8 @@ int main() {
     SetWindowSize(larguraMonitor, alturaMonitor);
     ToggleFullscreen();
 
-    carregar_mapa(&jogadorPrincipal);
+    int faseAtual = 1;
+    carregar_mapa(&jogadorPrincipal, &faseAtual);
 
     Camera2D camera = { 0 };
     camera.target.x = jogadorPrincipal.posicaoX;
@@ -160,7 +160,7 @@ int main() {
                 mostrar_tela_combate(jogadorPrincipal.pokemons[0], jogador.pokemons[3 + (rand() %3)], texturas, &jogadorPrincipal);
             } else {
 				Jogador_t opponent = configurar_oponente(jogador, jogadorPrincipal);
-                mostrar_tela_combate_inimigo(jogadorPrincipal.pokemons[0],opponent, texturas, &jogadorPrincipal);
+                mostrar_tela_combate_inimigo(jogadorPrincipal.pokemons[0],opponent, texturas, &jogadorPrincipal, &faseAtual);
             }
 
         } else {

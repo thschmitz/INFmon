@@ -1,7 +1,7 @@
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGA
 A                                     G                        A
-A       E                G                 G                   A
+A       E            J    G                G                   A
 A                         G                       G            A
 A                              G                              GA
 A                              G                              GA
@@ -31,6 +31,6 @@ A                              P GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGA
 A                              PPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPPA
 A                              PGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGA
 A                              P                  GGGGGGGGGGGGGA
-A                       G                  J   GGGGGGGGGGGGGGGGA
+A                       G                      GGGGGGGGGGGGGGGGA
 AGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGA
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA

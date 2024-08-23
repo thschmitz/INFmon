@@ -1,10 +1,9 @@
 #include "../config/config.h"
 
-void carregar_mapa(Jogador_t *jogadorPrincipal) {
-    mapa.fase_atual = 1;
+void carregar_mapa(Jogador_t *jogadorPrincipal, int *faseAtual) {
     char nome_mapa[20] = "\0";
 
-    snprintf(nome_mapa, 20, "mapas/mapa%d.txt", mapa.fase_atual);
+    snprintf(nome_mapa, 20, "mapas/mapa%d.txt", *faseAtual);
 
     FILE *file = fopen(nome_mapa, "r");
 
