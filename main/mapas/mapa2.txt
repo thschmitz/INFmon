@@ -1,7 +1,7 @@
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 A                                 G           G                A
 A                                 G           G                A
-A      E                          G           G                A
+A      E               J          G           G                A
 A                                 G           G                A
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA               A
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA               A
@@ -31,7 +31,7 @@ AGGGGGG               AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AGGGGGG               AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AGGGGGG                 G      G                               A
 AGGGGGGGGG              G      G                               A
-AGGGGGGGGGGG            G      G                       J       A
+AGGGGGGGGGGG            G      G                               A
 AGGGGGGGGGGGGGGGG       G      G                               A
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 

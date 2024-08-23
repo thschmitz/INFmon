@@ -23,7 +23,7 @@ AGGGGGGGGGGGGGGGGGGGGGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 AGGGGGGGGGGGGGGGGGGGGGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 A                       GG     GG                              A
 A      GGGG              GG     GG     GGG         GGG         A
-A      GGGG             GG     GG      GEG         GEG         A
+A      GGGG             GG     GG      GGG         GGG         A
 A      GGGG              GG     GG     GGG         GGG         A
 A                       GG     GG                              A
 AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGGGGGGGGGGGGGGGGGGA

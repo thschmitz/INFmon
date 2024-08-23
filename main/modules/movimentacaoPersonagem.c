@@ -42,7 +42,7 @@ int deve_mover(int dx, int dy, int *selvagem, Jogador_t *jogadorPrincipal) //def
 			mx = (int)(jogadorPrincipal->posicaoX / LADO);
 			my = (int)((jogadorPrincipal->posicaoY + 9) / LADO);
 			if (mapa.tiles[my][mx + 1] == 'W') mover = 0;
-			else if(mapa.tiles[my][mx + 1] == 'P') mover = 0;
+			else if(mapa.tiles[my][mx + 1] == 'P' || mapa.tiles[my][mx + 1] == 'A') mover = 0;
 			else if(mapa.tiles[my][mx + 1] == 'E') {
 				menu_inicial_rodando = false;
         		menu_erro_rodando = false;
@@ -54,7 +54,7 @@ int deve_mover(int dx, int dy, int *selvagem, Jogador_t *jogadorPrincipal) //def
 			mx = (int)((jogadorPrincipal->posicaoX + 19) / LADO);
 			my = (int)((jogadorPrincipal->posicaoY + 9) / LADO);
 			if (mapa.tiles[my][mx - 1] == 'W')mover = 0;
-			else if(mapa.tiles[my][mx - 1] == 'P') mover = 0;
+			else if(mapa.tiles[my][mx - 1] == 'P' || mapa.tiles[my][mx - 1] == 'A') mover = 0;
 			else if(mapa.tiles[my][mx - 1] == 'E') {
 				menu_inicial_rodando = false;
         		menu_erro_rodando = false;
@@ -67,7 +67,7 @@ int deve_mover(int dx, int dy, int *selvagem, Jogador_t *jogadorPrincipal) //def
 			mx = (int)((jogadorPrincipal->posicaoX + 9) / LADO);
 			my = (int)(jogadorPrincipal->posicaoY / LADO);
 			if (mapa.tiles[my + 1][mx] == 'W')mover = 0;
-			else if(mapa.tiles[my + 1][mx] == 'P') mover = 0;
+			else if(mapa.tiles[my + 1][mx] == 'P' || mapa.tiles[my + 1][mx] == 'A') mover = 0;
 			else if(mapa.tiles[my + 1][mx] == 'E') {
 				menu_inicial_rodando = false;
         		menu_erro_rodando = false;
@@ -79,7 +79,7 @@ int deve_mover(int dx, int dy, int *selvagem, Jogador_t *jogadorPrincipal) //def
 			mx = (int)((jogadorPrincipal->posicaoX + 9) / LADO);
 			my = (int)((jogadorPrincipal->posicaoY + 19) / LADO);
 			if (mapa.tiles[my - 1][mx] == 'W') mover = 0;
-			else if(mapa.tiles[my - 1][mx] == 'P') mover = 0;
+			else if(mapa.tiles[my - 1][mx] == 'P' || mapa.tiles[my - 1][mx] == 'A') mover = 0;
 			else if(mapa.tiles[my - 1][mx] == 'E') {
 				menu_inicial_rodando = false;
         		menu_erro_rodando = false;

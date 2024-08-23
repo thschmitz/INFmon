@@ -157,10 +157,10 @@ int main() {
             menu_erro();
         } else if (menu_batalha_rodando) {
             if (selvagem) {
-                mostrar_tela_combate(jogadorPrincipal.pokemons[0], jogador.pokemons[3 + (rand() %3)], texturas, &jogadorPrincipal);
+                mostrar_tela_combate(jogadorPrincipal.pokemons[0], jogador.pokemons[3 + (rand() %3)], texturas, &jogadorPrincipal, &selvagem);
             } else {
 				Jogador_t opponent = configurar_oponente(jogador, jogadorPrincipal);
-                mostrar_tela_combate_inimigo(jogadorPrincipal.pokemons[0],opponent, texturas, &jogadorPrincipal, &faseAtual);
+                mostrar_tela_combate_inimigo(jogadorPrincipal.pokemons[0],opponent, texturas, &jogadorPrincipal, &faseAtual, &selvagem);
             }
 
         } else {
