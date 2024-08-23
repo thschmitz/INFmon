@@ -230,16 +230,12 @@ void desenhar_opcoes_combate(InterfaceCombate_t *ui, int *combateAtivo, int *fug
                 if(jogadorPrincipal->qtdPokemons >= QUANTIDADE_POKEMONS_POR_JOGADOR){
                     desenhar_interface_dialogo("Sua mochila esta cheia de pokemons!");
                 } else {
-                    *combateAtivo = false;
                     if(tentar_capturar(opponent)) {    
-                        jogadorPrincipal->qtdPokemons+=1;
                         desenhar_interface_dialogo("Pokemon capturado com sucesso!");
-                        for(int i =0; i < jogadorPrincipal->qtdPokemons;i++){
-                            if(strlen(jogadorPrincipal->pokemons[i].nome) == 0){
-                                jogadorPrincipal->pokemons[i] = *opponent;
-                                break;
-                            }
-                        }
+                        jogadorPrincipal->pokemons[jogadorPrincipal->qtdPokemons] = *opponent;
+                        jogadorPrincipal->qtdPokemons+=1;
+                        *combateAtivo = false;
+                        menu_batalha_rodando = false; 
                     } else {
                         desenhar_interface_dialogo("Captura falhou!");
                         Ataque_t tipoAtaque = opponent->ataques[rand() % QUANTIDADE_ATAQUES_POR_POKEMON]; // Seleciona um ataque aleatório do oponente
@@ -344,7 +340,10 @@ void ataqueOponente(Pokemon_t *opponent, Pokemon_t *player, Ataque_t ataqueOpone
         } else {
             desenhar_interface_dialogo("Todos os seus Pokémons foram derrotados!");
             WaitTime(2);
+            EndDrawing();
+            WaitTime(2);
             menu_batalha_rodando = false; // Finaliza o combate se não houver mais Pokémons disponíveis
+            menu_inicial_rodando = true;
             *combateAtivo = false;
         }
     }
@@ -480,6 +479,7 @@ void ataqueOponente_inimigo(Pokemon_t *opponent, Pokemon_t *player, Ataque_t ata
             EndDrawing();
             WaitTime(2);
             menu_batalha_rodando = false; // Finaliza o combate se não houver mais Pokémons disponíveis
+            menu_inicial_rodando = true;
             *combateAtivo = false;
         }
     }
