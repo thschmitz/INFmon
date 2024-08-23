@@ -156,6 +156,7 @@ void menu_inicial(Jogador_t *jogadorPrincipal) {
     switch (selection) {
       case 0:
         // Novo Jogo
+        resetarConfig(jogadorPrincipal);
         menu_inicial_rodando = false;
         menuOpen = false;
         break;
@@ -197,6 +198,13 @@ int salvar_jogo(Jogador_t *jogadorPrincipal){
   }
 
   return retorno;
+}
+
+void resetarConfig(Jogador_t *jogadorPrincipal){
+  Jogador_t personagemPrincipalResetado;
+  personagemPrincipalResetado.posicaoX = jogadorPrincipal->posicaoX;
+  personagemPrincipalResetado.posicaoY = jogadorPrincipal->posicaoY;
+  *jogadorPrincipal = personagemPrincipalResetado;
 }
 
 int carregar_jogo(Jogador_t *jogadorPrincipal){

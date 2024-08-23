@@ -397,20 +397,19 @@ void desenhar_opcoes_ataque(InterfaceCombate_t *ui, int *selection, int *menuAta
             desenhar_interface_dialogo(TextFormat("Esse ataque é super efetivo!"));
 
         if (opponent->vida <= 0) {
+
             desenhar_interface_dialogo(TextFormat("Voce derrotou %s!", opponent->nome));
 
             // Ganhar XP
             player->xp += 50*(1-((opponent->xp/100) - (player->xp/100)));
 
-            // Regenerar a vida de todos os Pokémons do jogador ao iniciar a batalha
-            for (int i = 0; i < jogadorPrincipal->qtdPokemons; i++) {
-                jogadorPrincipal->pokemons[i].vida = jogadorPrincipal->pokemons[i].vidaMaxima;
-            }
-
             // Atualiza o Pokémon principal (player) para refletir a vida regenerada
             for (int i = 0; i < jogadorPrincipal->qtdPokemons; i++) {
+                jogadorPrincipal->pokemons[i].vida = jogadorPrincipal->pokemons[i].vidaMaxima;
                 if (strcmp(player->nome, jogadorPrincipal->pokemons[i].nome) == 0) {
                     player->vida = jogadorPrincipal->pokemons[i].vidaMaxima;
+                    jogadorPrincipal->pokemons[i].xp = player->xp;
+
                     break;
                 }
             }
@@ -454,6 +453,7 @@ void desenhar_opcoes_ataque_inimigo(InterfaceCombate_t *ui, int *selection, int 
 
         if (opponent->vida <= 0) {
             desenhar_interface_dialogo(TextFormat("Voce derrotou %s!", opponent->nome));
+            printf("DESCARGO DE CONSCIENCIA");
             EndDrawing();
             WaitTime(2);
 
